@@ -1,0 +1,27 @@
+Hoating 		dccclick
+Paaswd			Cdni.2012
+Cuenta FTP 
+		sismedical@dccclick.com.ec 
+		UsuarioFtp.2012
+		Ruta /home/dccclick/public_html
+
+url http://50.31.177.37/~dccclick/sismedical/public/		
+
+cd c/xamp/htdocs/sismedical
+git status
+git add nomArchivo
+git commit -m "Ejemplo de formulario de ingreso"
+git remote add origin https://github.com/daniloaguay/Sistema-Medico.git
+git push -u origin master
+
+		elmalir
+		Github.2012
+
+
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/elmalir/prueba-github-ubuntu.git
+git push -u origin master
