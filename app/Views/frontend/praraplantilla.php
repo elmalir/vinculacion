@@ -1,3 +1,22 @@
+    <!--<div class="contenedor">
+        <button id="btn-abrir-popup" class="btn-abrir-popup">Abrir Ventana Emergente</button>
+        <div class="overlay" id="overlay">
+            <div class="popup" id="popup">
+                <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                <h3>SUSCRIBETE</h3>
+                <h4>y recibe un cupon de descuento.</h4>
+                <form action="">
+                    <div class="contenedor-inputs">
+                        <input type="text" placeholder="Nombre">
+                        <input type="email" placeholder="Correo">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>-->
+    
+
+
 <!-- Container fluid  -->
 <div class="container-fluid">
     <!-- Start Page Content -->
