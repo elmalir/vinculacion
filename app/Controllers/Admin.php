@@ -154,9 +154,10 @@ class Admin extends BaseController
 				'Direccion' => $this->request->getPost('txtDireccion'),
 				'Telefono' => $this->request->getPost('txtTelefono'),
 				'Celular' => $this->request->getPost('txtCelular'),
-				'FormacionAcademica' => $this->request->getPost('txtFormacionAcademica')
+				'FormacionAcademica' => $this->request->getPost('txtFormacionAcademica'),
+				'IdEmpresa' => 4 //Obtener el IdEmpresa 
 				];
-		//var_dump($dataEmpresa);
+		//var_dump($dataProfesional);
 		$r = $profesional->save($dataProfesional);
 		if ($r === false) {
 			//var_dump($empresa->errors());
@@ -170,8 +171,8 @@ class Admin extends BaseController
 			var_dump($r);
 			$this->index();
 		}
-		//$r = $empresa->insert($dataEmpresa);
-		//print_r($r);
+		$r = $empresa->insert($dataEmpresa);
+		print_r($r);
 	}
 	public function listProfesionales()
 	{
