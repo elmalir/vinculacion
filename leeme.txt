@@ -11,17 +11,19 @@ cd c/xamp/htdocs/sismedical
 git status
 git add nomArchivo
 git commit -m "Ejemplo de formulario de ingreso"
-git remote add origin https://github.com/daniloaguay/Sistema-Medico.git
+git remote add origin https://github.com/daniloaguay/sismedical.git
 git push -u origin master
 
 		elmalir
 		Github.2012
 
 
+git remote -v
 
 git init
 git add README.md
 git commit -m "first commit"
 git branch -M master
 git remote add origin https://github.com/elmalir/prueba-github-ubuntu.git
+git remote add origin https://github.com/elmalir/sismedical.git
 git push -u origin master
