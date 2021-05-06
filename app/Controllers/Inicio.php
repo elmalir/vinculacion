@@ -17,7 +17,7 @@ class Inicio extends BaseController
 		//$vista = view('backend/plantilla/template', $dato);
 		////echo "string";
 		//return $vista;
-
+		
 		$dato['contenedor'] = 'frontend/praraplantilla';
 		$vista = view('backend/plantilla/template', $dato);
 		return $vista;

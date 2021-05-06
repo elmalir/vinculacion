@@ -7,14 +7,14 @@ use CodeIgniter\Model;
 class Usuario_Model extends Model
 {
     protected $table      = 'usuarios';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'Id';
 
     protected $useAutoIncrement = true;
 
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['Nombre', 'Correo', 'Contrasenia'];
+    protected $allowedFields = ['Id', 'Nombre', 'Correo', 'Contrasenia', 'IdRol', 'Activo', 'IdEmpresa'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -24,4 +24,12 @@ class Usuario_Model extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+
+    public function getUsuario($user, $passwd)
+    {
+        //$db = \Config\Database::connect();
+        $builder = $this->db->table('usuarios');
+        $builder->where('Nombre', $user)->where('Contrasenia', $passwd);
+        return $builder->get()->getResultArray();
+    }
 }

@@ -30,7 +30,7 @@ class Empresa_Model extends Model
     	],
     	'Correo' => [
     						'required' => 'El campo Correo es obligatorio',
-    						'is_unique' => 'El Correo ingresado ya se encuentra en uso',
+    						'is_unique' => 'El Correo debe ser único',
     						'valid_email' => 'Ingrese Correo válido'
     	]
     ];

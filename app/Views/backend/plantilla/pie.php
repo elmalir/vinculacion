@@ -26,11 +26,9 @@
     <!-- this page js -->
     <script src="<?php echo base_url(); ?>/public/css/backend/assets/libs/moment/min/moment.min.js"></script>
     <script src="<?php echo base_url(); ?>/public/css/backend/assets/extra-libs/DataTables/datatables.min.js"></script>
-    <script src="<?php echo base_url(); ?>/public/css/backend/dist/js/popup.js"></script>
 
     <script>
         $('#dynamic-table').DataTable();
-        $('#dynamic-table1').DataTable();
     </script>
 </body>
 </html>
