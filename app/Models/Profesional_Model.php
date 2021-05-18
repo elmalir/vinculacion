@@ -10,7 +10,7 @@ class Profesional_Model extends Model
 	protected $primaryKey = 'Id';
 	protected $useAutoIncrement = true;
 	protected $typeReturn = 'object';
-	protected $allowedFields = ['Id', 'Identificacion', 'Nombre', 'Especialidad', 'Correo', 'Contrasenia', 'Direccion', 'Telefono', 'Celular', 'FormacionAcademica', 'IdEmpresa'];
+	protected $allowedFields = ['Id', 'Identificacion', 'Nombre', 'Especialidad', 'FormacionAcademica', 'Correo', 'Contrasenia', 'IdProvincia', 'IdCiudad', 'Direccion', 'Telefono', 'Celular', 'IdRol', 'IdEmpresa'];
 	protected $useSoftDeletes = true;
 	//protected $useTimestamps = true; //‘created_at’ and ‘updated_at’ in the table
 	protected $validationRules    = [

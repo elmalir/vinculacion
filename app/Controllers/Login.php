@@ -7,7 +7,24 @@ class Login extends BaseController
 	{
 		return view('backend/usuario/login_view');
 	}
-	public function login()
+	public function login(){
+		$txtUsuario = $this->request->getPost('txtUsuario');
+		$txtContrasenia = $this->request->getPost('txtContrasenia');
+		$segurityModel = new \App\Models\Seguridad_Model();
+		$txtContrasenia = sha1($txtContrasenia);
+
+		$user = $segurityModel->getOneProfesional($txtUsuario, $txtContrasenia);
+		if (count($user) > 0) {
+			$session = session();
+			$dataSesion = ['usuario' => $user[0]->Nombre, 'correo' => $user[0]->Correo, 'idEmpresa' =>$user[0]->IdEmpresa ];
+			$session->set($dataSesion);
+			return redirect()->to(base_url('/admin'));
+		}else{
+			$dato['error'] = 'Usuario y/o contraseña incorrectos'.$txtContrasenia;
+			return view('backend/usuario/login_view', $dato);
+		}
+	}
+	public function login1()
 	{
 		$txtUsuario = $this->request->getPost('txtUsuario');
 		$txtContrasenia = $this->request->getPost('txtContrasenia');

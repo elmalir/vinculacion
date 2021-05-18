@@ -26,6 +26,8 @@
     <!-- this page js -->
     <script src="<?php echo base_url(); ?>/public/css/backend/assets/libs/moment/min/moment.min.js"></script>
     <script src="<?php echo base_url(); ?>/public/css/backend/assets/extra-libs/DataTables/datatables.min.js"></script>
+    <!-- sweetalert2 -->
+    <script src="<?php echo base_url() ?>/public/css/backend/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <script>
         $('#dynamic-table').DataTable();

@@ -10,7 +10,7 @@ class Ciudad_Model extends Model
 	protected $primaryKey = 'Id';
 	protected $useAutoIncrement = true;
 	protected $typeReturn = 'array';
-	protected $allowedFields = ['Id', 'Nombre'];
+	protected $allowedFields = ['Id', 'Nombre', 'IdProvincia'];
 	//protected $useSoftDeletes = true;
 	//protected $useTimestamps = false;
 	//protected $validationRules    = [];

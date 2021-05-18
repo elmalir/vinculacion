@@ -22,7 +22,8 @@ class Paciente_Model extends Model
     	'Identificacion' => [
     						'required' => 'El campo Identificación es obligatorio',
     						'numeric' => 'El campo debe contener unicamente dígitos numéricos',
-    						'is_unique' => 'La Identificación ya se encuentra registrada'
+    						'is_unique' => 'La Identificación ya se encuentra registrada',
+    						'min_length' => 'La Identificación debe tener mínimo 10 dígitos'
     	],
     	'Contrasenia' => [
     						'required' => 'El campo Contraseña es obligatorio',
@@ -41,27 +42,6 @@ class Paciente_Model extends Model
 		//$emp = $this->db->table('empresa');
 		//return $emp->get()->getResultArray();
 	//}
-
-}
-
-?><?php
-namespace App\Models;
-use CodeIgniter\Model;
-/**
- * 
- */
-class Paciente_Model extends Model
-{
-	protected $table = 'pacientes';
-	protected $primaryKey = 'Id';
-	protected $useAutoIncrement = true;
-	protected $typeReturn = 'array';
-	protected $allowedFields = ['Id', 'Identificacion', 'Nombre', 'FechaNacimiento', 'Sexo', 'Etnia', 'EstadoCivil', 'Correo', 'Telefono', 'Celular', 'Direccion', 'ContactoEmergencia', 'AntecedentePatalogico', 'Contrasenia', 'GrupoSanguineo', 'Ocupacion', 'IdEmpresa', 'IdProvincia', 'IdCiudad'];
-	protected $useSoftDeletes = true;
-	protected $useTimestamps = false;
-	//protected $validationRules    = [];
-    //protected $validationMessages = [];
-	//protected $skipValidation  = false;
 
 }
 

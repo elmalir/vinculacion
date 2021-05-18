@@ -137,7 +137,7 @@
                                     <div class="row">
                                         <label class="col-sm-3 text-right control-label col-form-label">Antecedente Patológico</label>
                                         <div class="col-sm-9">
-                                            <textarea class="form-control" name="txtAntecedentePatalogico" value="<?php echo set_value('txtAntecedentePatalogico'); ?>"></textarea>
+                                            <textarea class="form-control" name="txtAntecedentePatologico" value="<?php echo set_value('txtAntecedentePatalogico'); ?>"></textarea>
                                         </div>
                                     </div>
                                     <div class="row">

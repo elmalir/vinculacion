@@ -26,7 +26,7 @@
 											<td><?php echo $paciente->Direccion; ?>
 										</td>
 										<td><div align="center">
-											
+
 											<?php
 											if ($paciente->Activo == 0) {
 												echo '<span class="label label-sm label-inverse">Inactivo</span>';
@@ -42,25 +42,81 @@
 									</td>
 									<td>
 										<div class="action-buttons" align="center">
-											<a class="blue" onclick="ver('<?php echo $paciente->Id; ?>')" href="#">
-												<i class="ace-icon fas fa-eye bigger-130" style="color:#6E6E6E"></i>
+											<a class="" onclick="ver('<?php echo $paciente->Id; ?>')" href="#">
+												<i class="ace-icon fas fa-eye bigger-130" style="color:#52a5f3 "></i>
 											</a>
-											<a class="green" onclick="editar('<?php echo $paciente->Id; ?>')" href="#">
-												<i class="ace-icon fas fa-edit bigger-130" style="color:#6E6E6E"></i>
+											<a class="" href="<?php echo base_url().'/admin/editarPaciente/'.$paciente->Id; ?>">
+												<i class="ace-icon fas fa-edit bigger-130" style="color:#06bd3d"></i>
 											</a>
-											<a class="red" onclick="eliminar('<?php echo $paciente->Id; ?>', '<?php echo $paciente->Nombre; ?>')" href="#">
-												<i class="ace-icon fas fa-window-close bigger-130" style="color:#6E6E6E"></i>
+											<a class="" onclick="eliminar('<?php echo $paciente->Id; ?>', '<?php echo $paciente->Nombre; ?>')" href="#">
+												<i class="ace-icon fas fa-window-close bigger-130" style="color:#f64d55"></i>
 											</a>
 										</div>
 									</td>
 								</tr>
-							<?php }
-						}?>
-					</tbody>
-				</table>
+									<?php }
+								}?>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-</div>
-</div>
+
+<script type="text/javascript">
+	function eliminar(id, nombre){
+		var baseurl = "<?php echo base_url(); ?>/";
+		console.log(id, nombre, baseurl);
+		Swal.fire({
+			title: '¿Desea elimiar el registro?',
+			text: nombre,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonText: 'Cancelar',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, eliminar!'
+		}).then((result) => {
+			if (result.value) {
+			// Agregar ajax
+			$.ajax({
+				type: "POST",
+				url: baseurl+"admin/eliminarPaciente",
+				data: {"id": id},
+				success: function(){
+					Swal.fire(
+						'Eliminado!',
+						'Registro eliminado.',
+						'success'
+						).then((result) =>{
+							if (result.value) {
+								window.location.href = "listPacientes";
+							}
+						} )
+					}
+					,statusCode: {
+						400: function(data){
+							var json = JSON.parse(data.responseText);
+							Swal.fire(
+								'Error!',
+								json.sms,
+								'error'
+								)
+						},
+						500: function(data){
+							console.log("el 500 ");
+							var json = JSON.parse(data.responseText);
+							Swal.fire(
+								'Error!',
+								json.sms,
+								'error'
+								)
+						}
+					}
+				});
+			}
+			})
+	};
+</script>

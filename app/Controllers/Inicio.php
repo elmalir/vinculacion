@@ -13,13 +13,13 @@ class Inicio extends BaseController
 		//$vista = view('backend/plantilla/plantilla');
 		//$emp = new \App\Models\Empresa_Model();
 		//$datos['emp'] = $emp->getEmpresa();
-		//$dato['contenedor'] = 'frontend/forms';
-		//$vista = view('backend/plantilla/template', $dato);
+		$dato['contenedor'] = 'frontend/forms';
+		$vista = view('backend/plantilla/template', $dato);
 		////echo "string";
 		//return $vista;
 		
-		$dato['contenedor'] = 'frontend/praraplantilla';
-		$vista = view('backend/plantilla/template', $dato);
+		//$dato['contenedor'] = 'frontend/praraplantilla';
+		//$vista = view('backend/plantilla/template', $dato);
 		return $vista;
 	}
 	public function prueba()

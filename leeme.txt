@@ -5,25 +5,38 @@ Cuenta FTP
 		UsuarioFtp.2012
 		Ruta /home/dccclick/public_html
 
-url http://50.31.177.37/~dccclick/sismedical/public/		
+url http://50.31.177.37/~dccclick/sismedical/public/
 
-cd c/xamp/htdocs/sismedical
-git status
-git add nomArchivo
-git commit -m "Ejemplo de formulario de ingreso"
-git remote add origin https://github.com/daniloaguay/sismedical.git
-git push -u origin master
-
-		elmalir
-		Github.2012
-
-
+Ver repositorio remoto
 git remote -v
 
 git init
 git add README.md
 git commit -m "first commit"
 git branch -M master
-git remote add origin https://github.com/elmalir/prueba-github-ubuntu.git
-git remote add origin https://github.com/elmalir/sismedical.git
 git push -u origin master
+
+----------FUNCIONAL------------
+Ir a ruta con git bash
+ 	cd c/xamp/htdocs/sismedical
+Borrar carpeta oculta .git
+Inicializar git con
+	git init
+Ver archivos a subir con	
+	git status
+Agregar archivos a subir con 
+	git add nombreArchivo (git add * -> aregar todo los archivos)	
+Agregar el repositorio remoto
+	git remote add origin https://github.com/daniloaguay/sismedical.git
+Subir
+	git commit -m "Comentario"	
+Push
+	git push -u origin master	
+	o
+	git push origin master --force
+
+	elmalir
+	Github.2012
+	Carol.2012
+
+git pull origin master

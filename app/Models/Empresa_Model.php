@@ -41,6 +41,13 @@ class Empresa_Model extends Model
 		//$emp = $this->db->table('empresa');
 		//return $emp->get()->getResultArray();
 	//}
+	public function verDetalleEmpresa($idEmpresa)
+	{
+		$builder = $this->db->table('empresa e');
+		$builder->select('e.Identificacion, e.RazonSocial, e.NombreComercial, e.Direccion, e.Correo, e.Telefono, e.Celular, p.Nombre as Provincia');
+		$builder->join('provincias p', 'p.Id = e.IdProvincia');
+		return $builder->get()->getResult();
+	}
 }
 
 ?>
