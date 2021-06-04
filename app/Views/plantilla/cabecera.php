@@ -14,7 +14,8 @@
 		<link rel="stylesheet" href="<?php echo base_url() ?>/plantilla/css/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
-
+		<!-- sweetalert2 -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/plantilla/css/sweetalert2/dist/sweetalert2.min.css">
 		<!-- text fonts -->
 		<link rel="stylesheet" href="<?php echo base_url() ?>/plantilla/css/assets/css/fonts.googleapis.com.css" />
 

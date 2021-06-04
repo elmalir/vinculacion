@@ -61,7 +61,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a onclick="editar('.$p->id.')" href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                        <a onclick="editar(<?= $p->id; ?>)" href="" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                             <span class="green">
                                                                 <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
                                                             </span>
@@ -88,14 +88,64 @@
         </div>
     </div>
 </div>
-<script>
+
+<script type="text/javascript">
+    var baseurl = "<?= base_url() ?>";
     function ver(){
         console.log('ver');
     }
-    function editar(){
-        console.log('editar');
+    function editar(id){
+        //window.open(baseurl+'/proyectos/'+id+'/editar', '_blank');
+        window.location.href = baseurl+'/proyectos/'+id+'/editar';
     }
-    function eliminar(){
-        console.log('eliminar');
-    }
+    function eliminar(id, nombre){
+        Swal.fire({
+          title: '¿Desea elimiar el registro?',
+          text: nombre,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonText: 'Cancelar',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, eliminar!'
+        }).then((result) => {
+              if (result.value) {
+                $.ajax({
+                        type: "post",
+                        url: baseurl+"/proyectos/borrar",
+                        data: {"id": id},
+                        success: function(){
+                                    Swal.fire(
+                                      'Eliminado!',
+                                      'Registro eliminado.',
+                                      'success'
+                                    ).then((result) =>{
+                                        console.log(result);
+                                        if (result.value) {
+                                            window.location.href = baseurl+"/proyectos";
+                                        }
+                                    } )
+                        }
+                        ,statusCode: {
+                            400: function(data){
+                                var json = JSON.parse(data.responseText);
+                                Swal.fire(
+                                      'Error!',
+                                      json.sms,
+                                      'error'
+                                    )
+                            },
+                            500: function(data){
+                                var json = JSON.parse(data.responseText);
+                                Swal.fire(
+                                      'Error!',
+                                      json.sms,
+                                      'error'
+                                    )
+                            }
+                        }
+                });
+              }
+        })
+    };
 </script>

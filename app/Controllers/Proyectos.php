@@ -8,6 +8,7 @@ class Proyectos extends Controller{
 
     public function index()
     {
+        helper('form');
         $datos['menu'] = 'proyectos';
         $datos['subMenu'] = 'lstProyectos';
         $p = new ProyectoModel();
@@ -30,6 +31,7 @@ class Proyectos extends Controller{
     {
         $proyecto = new ProyectoModel();
         $id = $this->request->getVar('codigo');
+        //echo $id;
         $dataProyecto =[];
         if (!empty($id)) {
             $dataProyecto = [
@@ -95,6 +97,16 @@ class Proyectos extends Controller{
         $vista = view('plantilla/template', $datos);
         return $vista;
 
+    }
+    public function borrarProyecto()
+    {
+        $id = $this->request->getVar('id');
+        $proyecto = new ProyectoModel();
+        $eliminado = $proyecto->where('id', $id)->delete($id);
+        //$p = $proyecto->asObject()->find($id);
+        echo json_encode(array('sms' => 'Registro eliminado!'.$eliminado));
+        //return json_encode($eliminado);
+        //print_r($r);
     }
 
 

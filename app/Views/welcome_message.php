@@ -6,7 +6,8 @@
 	<meta name="description" content="The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
-
+<!-- sweetalert2 -->
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/plantilla/css/sweetalert2/dist/sweetalert2.min.css">
 	<!-- STYLES -->
 
 	<style {csp-style-nonce}>
@@ -206,6 +207,8 @@
 			</li>
 			<li class="menu-toggle">
 				<button onclick="toggleMenu();">&#9776;</button>
+				
+
 			</li>
 			<li class="menu-item hidden"><a href="#">Home</a></li>
 			<li class="menu-item hidden"><a href="https://codeigniter4.github.io/userguide/" target="_blank">Docs</a>
@@ -223,7 +226,7 @@
 
 		<h2>The small framework with powerful features</h2>
 
-
+		<button onclick="ver();">&#9776;Ventana</button>
 
 	</div>
 
@@ -309,7 +312,7 @@
 </footer>
 
 <!-- SCRIPTS -->
-
+<script src="<?php echo base_url() ?>/plantilla/css/sweetalert2/dist/sweetalert2.min.js"></script>
 <script>
 	function toggleMenu() {
 		var menuItems = document.getElementsByClassName('menu-item');
@@ -318,6 +321,10 @@
 			menuItem.classList.toggle("hidden");
 		}
 	}
+	function ver(){
+        console.log('ver');
+        Swal.fire('Any fool can use a computer')
+    }
 </script>
 
 <!-- -->
