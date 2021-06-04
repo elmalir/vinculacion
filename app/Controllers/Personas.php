@@ -8,7 +8,8 @@ class Personas extends Controller{
 
     public function index()
     {
-        //$p = new Persona();
+        $datos['menu'] = 'personas';
+        $datos['subMenu'] = 'lstPersonas';
         $p = new PersonaModel();
         //$datos['personas'] = $p->orderBy('id', 'ASC')->findAll();
         $datos['personas'] = $p->asObject()->findAll();
@@ -22,6 +23,16 @@ class Personas extends Controller{
         $datos['contenedor'] = 'personas/personas_view';
 		$vista = view('plantilla/template', $datos);
         return $vista;
-        
     }
+    public function nuevaPersona()
+    {
+        helper('form');
+        $datos['menu'] = 'personas';
+        $datos['subMenu'] = 'newPersona';
+        $datos['contenedor'] = 'personas/persona_new_view';
+        $vista = view('plantilla/template', $datos);
+        return $vista;
+    }
+
+
 }

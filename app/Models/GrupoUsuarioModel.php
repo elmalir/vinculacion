@@ -3,7 +3,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class GrupoUsuario_Model extends Model{
+class GrupoUsuarioModel extends Model{
     protected $table      = 'gruposusuarios';
     
     // Uncomment below if you want add primary key

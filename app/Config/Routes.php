@@ -18,7 +18,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('inicio');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,7 +32,8 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+#$routes->get('/', 'Home::index');
+$routes->get('/', 'Inicio::index');
 
 /*
  * --------------------------------------------------------------------
@@ -52,3 +53,9 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
 $routes->get('/personas', 'Personas::index');
+$routes->get('/personas/nueva', 'Personas::nuevaPersona');
+
+$routes->get('/proyectos', 'Proyectos::index');
+$routes->get('/proyectos/nuevo', 'Proyectos::nuevoProyecto');
+$routes->post('/proyectos/guardar', 'Proyectos::guardarProyecto');
+$routes->get('/proyectos/(:num)/editar', 'Proyectos::editarPersona/$1');
