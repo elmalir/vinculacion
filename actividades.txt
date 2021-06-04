@@ -1,6 +1,0 @@
-Unificar usuarios con profesionales				/
-Agregar librería de sweetalert2 para mensajes modal animados 		/
-Crear el update de Paciente						/
-Trabajar en la Interfaz de Registro de Cita
-
-
