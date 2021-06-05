@@ -60,3 +60,4 @@ $routes->get('/proyectos/nuevo', 'Proyectos::nuevoProyecto');
 $routes->post('/proyectos/guardar', 'Proyectos::guardarProyecto');
 $routes->get('/proyectos/(:num)/editar', 'Proyectos::editarPersona/$1');
 $routes->post('/proyectos/borrar', 'Proyectos::borrarProyecto');
+$routes->post('/proyectos/ver', 'Proyectos::verPersona');

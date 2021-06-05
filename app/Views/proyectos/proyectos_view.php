@@ -1,6 +1,11 @@
 <div class="page-header">
     <h1>
         Proyectos
+        <?php 
+        $session = \Config\Services::session();
+        if (!empty($session->getFlashdata('mensaje'))) {
+            echo '<small><label class="orange">'.$session->getFlashdata('mensaje').'</label></small>';
+        }?>
     </h1>
 </div>
 <div class="row">
@@ -87,13 +92,59 @@
             </div>
         </div>
     </div>
+</div><!-- /.row -->
+<div id="modal-table" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button  onclick="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">&times;</span>
+                    </button>
+                    Detalle del Proyecto
+                </div>
+            </div>
+            <div class="modal-body no-padding">
+                
+            </div>
+            <div class="modal-footer no-margin-top">
+                <button onclick="cerrarModal()" class="btn btn-sm btn-danger pull-rigt" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Close
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
 <script type="text/javascript">
     var baseurl = "<?= base_url() ?>";
-    function ver(){
-        console.log('ver');
-    }
+    function ver(id) {
+		var ruta = baseurl+'/proyectos/ver';
+		$.ajax({
+			type: "post",
+			url: ruta,
+			data: {"id":id},
+			success: function(respuesta) {
+				$("#modal-table .modal-body").html(respuesta);
+				var divModal = document.getElementById("modal-table");
+				var body = document.getElementById("idbody");
+				divModal.classList.add('in');
+				body.classList.add('modal-open');
+				divModal.style.display = 'block';
+			},
+			error: function() {
+				console.log("No se ha podido obtener la información");
+			}
+		});
+	}
+    function cerrarModal(){
+		var divModal = document.getElementById("modal-table");
+		var body = document.getElementById("idbody");
+		body.classList.remove('modal-open');
+		divModal.classList.remove('in');
+		divModal.style.display = 'none';
+	}
     function editar(id){
         //window.open(baseurl+'/proyectos/'+id+'/editar', '_blank');
         window.location.href = baseurl+'/proyectos/'+id+'/editar';
@@ -114,17 +165,25 @@
                         type: "post",
                         url: baseurl+"/proyectos/borrar",
                         data: {"id": id},
-                        success: function(){
-                                    Swal.fire(
-                                      'Eliminado!',
-                                      'Registro eliminado.',
-                                      'success'
-                                    ).then((result) =>{
-                                        console.log(result);
-                                        if (result.value) {
-                                            window.location.href = baseurl+"/proyectos";
-                                        }
-                                    } )
+                        success: function(response){
+                            var respuesta = JSON.parse(response);
+                            console.log(respuesta);
+                            if(respuesta.estado == 1){
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: respuesta.titulo,
+                                    text: respuesta.mensaje,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                window.location.href = baseurl+"/proyectos";
+                            }else{
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: respuesta.titulo,
+                                    text: respuesta.mensaje,
+                                });
+                            }
                         }
                         ,statusCode: {
                             400: function(data){

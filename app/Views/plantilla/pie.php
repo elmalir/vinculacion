@@ -58,7 +58,27 @@
 <script src="<?php echo base_url() ?>/plantilla/css/sweetalert2/dist/sweetalert2.min.js"></script>
 
 <!-- inline scripts related to this page -->
-
+<script type="text/javascript">
+	$('#dynamic-table').DataTable({
+			"order": [ [0, 'desc'] ],
+			//"pageLength": 3,
+			"language": {
+				"emptyTable": "No existen datos",
+				"lengthMenu": "Ver _MENU_ registros por página",
+				"zeroRecords": "No encontrado",
+				"info": "Mostrando _PAGE_ página de _PAGES_",
+				"infoEmpty": "Ningún registro disponible",
+				"infoFiltered": "(filtrado de _MAX_ registros)",
+				"search":         "Buscar:",
+				"paginate": {
+					"first":      "Primero",
+					"last":       "Último",
+					"next":       "Sig.",
+					"previous":   "Ant."
+				}
+			}
+		});
+</script>
 
 </body>
 </html>

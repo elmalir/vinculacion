@@ -6,6 +6,7 @@ use App\Models\ProyectoModel;
 
 class Proyectos extends Controller{
 
+    
     public function index()
     {
         helper('form');
@@ -82,6 +83,8 @@ class Proyectos extends Controller{
             $errores = $proyecto->errors();
             return $this->nuevoProyecto($errores);
         }else{
+            $session = \Config\Services::session();
+            $session->setFlashdata('mensaje', 'Transacción realizada con éxito');
             return redirect()->route('proyectos')->with('msj', 'Guardado de manera existosa');
         }
     }
@@ -96,7 +99,6 @@ class Proyectos extends Controller{
         $datos['contenedor'] = 'proyectos/proyecto_edit_view';
         $vista = view('plantilla/template', $datos);
         return $vista;
-
     }
     public function borrarProyecto()
     {
@@ -104,9 +106,29 @@ class Proyectos extends Controller{
         $proyecto = new ProyectoModel();
         $eliminado = $proyecto->where('id', $id)->delete($id);
         //$p = $proyecto->asObject()->find($id);
-        echo json_encode(array('sms' => 'Registro eliminado!'.$eliminado));
+        $response =[];
+        if($eliminado == 1){
+            $response['estado']=1;
+            $response['titulo']='Eliminado';
+            $response['mensaje']='¡Registro eliminado con éxito!';
+        }else{
+            $response['estado']=1;
+            $response['titulo']='Conflito';
+            $response['mensaje']='¡Conflicto al intentar eliminar el registro!';
+        }
+        echo json_encode($response);
         //return json_encode($eliminado);
         //print_r($r);
+    }
+    public function verPersona()
+    {
+        $id = $this->request->getVar('id');
+        $proyecto = new ProyectoModel();
+        $proyecto = $proyecto->asObject()->find($id);
+        //print_r($proyecto);
+        $dato['proyecto'] = $proyecto; 
+        $vista = view("proyectos/proyecto_show_view", $dato);
+        return $vista;
     }
 
 
