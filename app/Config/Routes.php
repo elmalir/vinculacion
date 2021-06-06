@@ -57,14 +57,13 @@ $routes->get('/proyectos/nuevo', 'Proyectos::nuevoProyecto');
 $routes->post('/proyectos/guardar', 'Proyectos::guardarProyecto');
 $routes->get('/proyectos/(:num)/editar', 'Proyectos::editarPersona/$1');
 $routes->post('/proyectos/borrar', 'Proyectos::borrarProyecto');
-$routes->post('/proyectos/ver', 'Proyectos::verPersona');
+$routes->post('/proyectos/ver', 'Proyectos::verProyecto');
 
 $routes->get('gruposusuarios', 'GruposUsuarios::index');
 $routes->get('gruposusuarios/nuevo', 'GruposUsuarios::nuevo');
 $routes->post('gruposusuarios/guardar', 'GruposUsuarios::guardar');
 $routes->get('gruposusuarios/(:num)/editar', 'GruposUsuarios::editar/$1');
 $routes->post('gruposusuarios/borrar', 'GruposUsuarios::borrar');
-$routes->post('gruposusuarios/ver', 'GruposUsuarios::verPersona');
 $routes->get('gruposusuarios/pruebas', 'GruposUsuarios::pruebas');
 
 $routes->get('usuarios', 'Usuarios::index');
@@ -92,7 +91,7 @@ $routes->get('gremios/(:num)/editar', 'Gremios::editar/$1');
 $routes->post('gremios/borrar', 'Gremios::borrar');
 
 $routes->get('personas', 'Personas::index');
-$routes->get('personas/nueva', 'Personas::nueva');
+$routes->get('personas/nueva', 'Personas::nuevo');
 $routes->post('personas/guardar', 'Personas::guardar');
 $routes->get('personas/(:num)/editar', 'Personas::editar/$1');
 $routes->post('personas/borrar', 'Personas::borrar');

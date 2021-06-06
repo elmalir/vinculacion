@@ -21,7 +21,7 @@
 			</div>
 			<div class="widget-body">
 				<div class="widget-main no-padding">
-					<form class="form-horizontal" method="post" action=" <?= site_url('/gruposusuarios/guardar') ?>" >
+					<form class="form-horizontal" method="post" action="<?= site_url('/gruposusuarios/guardar') ?>" >
 						<div class="row">
 							<div class="col-xs-12 col-lg-6">
 								<div class="space-4"></div>

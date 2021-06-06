@@ -1,6 +1,11 @@
 <div class="page-header">
     <h1>
         Personas
+        <?php 
+        $session = \Config\Services::session();
+        if (!empty($session->getFlashdata('mensaje'))) {
+            echo '<small><label class="orange">'.$session->getFlashdata('mensaje').'</label></small>';
+        }?>
     </h1>
 </div>
 <div class="row">
@@ -8,17 +13,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    
                     <table id="dynamic-table" class="table table-striped table-bordered table-sm">
                         <thead>
                             <tr>
-                                <th>Identificación</th>
-                                <th>Nombre</th>
+                                <th>Persona</th>
                                 <th>Correo</th>
-                                <th>Dirección</th>
                                 <th>Contacto</th>
-                                <th>Observación</th>
-                                <th>Activo</th>
+                                <th>Estado</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
@@ -27,17 +28,12 @@
                             if (!empty($personas)) {
                                 foreach ($personas as $per) { ?>
                                     <tr>
-                                        <td>
+                                        <td><?php echo $per->nombre; ?><br>
                                             <small><?php echo $per->identificacion ?></small>
                                         </td>
-                                        <td><?php echo $per->nombre; ?>
-                                        </td>
-                                        <td><?php echo $per->correo; ?>
-                                        <td><?php echo $per->direccion; ?>
-                                        <td><?php echo $per->telefono.' - '.$per->celular; ?>
-                                        <td><?php echo $per->observacion; ?>
-                                        <td><?php echo $per->activo; ?>
-                                    </td>
+                                        <td><?php echo $per->correo; ?></td>
+                                        <td><?php echo $per->telefono.' - '.$per->celular; ?></td>
+                                        <td><?php echo ($per->activo==1) ? 'Activo' : 'Inactivo' ; ?></td>
                                     <td>
                                         <div class="hidden-sm hidden-xs action-buttons">
                                             <a class="blue" onclick="ver('<?php echo $per->id; ?>')" href="#">
@@ -90,15 +86,118 @@
             </div>
         </div>
     </div>
+</div><!-- /.row -->
+<div id="modal-table" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button  onclick="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">&times;</span>
+                    </button>
+                    Detalle de la Persona
+                </div>
+            </div>
+            <div class="modal-body no-padding">
+                
+            </div>
+            <div class="modal-footer no-margin-top">
+                <button onclick="cerrarModal()" class="btn btn-sm btn-danger pull-rigt" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Close
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 <script>
-    function ver(){
-        console.log('ver');
+var baseurl = "<?= base_url() ?>";
+function ver(id) {
+		var ruta = baseurl+'/personas/ver';
+		$.ajax({
+			type: "post",
+			url: ruta,
+			data: {"id":id},
+			success: function(respuesta) {
+				$("#modal-table .modal-body").html(respuesta);
+				var divModal = document.getElementById("modal-table");
+				var body = document.getElementById("idbody");
+				divModal.classList.add('in');
+				body.classList.add('modal-open');
+				divModal.style.display = 'block';
+			},
+			error: function() {
+				console.log("No se ha podido obtener la información");
+			}
+		});
+	}
+    function cerrarModal(){
+		var divModal = document.getElementById("modal-table");
+		var body = document.getElementById("idbody");
+		body.classList.remove('modal-open');
+		divModal.classList.remove('in');
+		divModal.style.display = 'none';
+	}
+    function editar(id){
+        window.location.href = baseurl+'/personas/'+id+'/editar';
     }
-    function editar(){
-        console.log('editar');
-    }
-    function eliminar(){
-        console.log('eliminar');
+    function eliminar(id, nombre){
+        Swal.fire({
+          title: '¿Desea elimiar el registro?',
+          text: nombre,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonText: 'Cancelar',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, eliminar!'
+        }).then((result) => {
+              if (result.value) {
+                $.ajax({
+                        type: "post",
+                        url: baseurl+"/personas/borrar",
+                        data: {"id": id},
+                        success: function(response){
+                            var respuesta = JSON.parse(response);
+                            console.log(respuesta);
+                            if(respuesta.estado == 1){
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: respuesta.titulo,
+                                    text: respuesta.mensaje,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                window.location.href = baseurl+"/personas";
+                            }else{
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: respuesta.titulo,
+                                    text: respuesta.mensaje,
+                                });
+                            }
+                        }
+                        ,statusCode: {
+                            400: function(data){
+                                var json = JSON.parse(data.responseText);
+                                Swal.fire(
+                                      'Error!',
+                                      json.sms,
+                                      'error'
+                                    )
+                            },
+                            500: function(data){
+                                var json = JSON.parse(data.responseText);
+                                console.log('error',json);
+                                Swal.fire(
+                                      'Error!',
+                                      json.sms,
+                                      'error'
+                                    )
+                            }
+                        }
+                });
+              }
+        })
     }
 </script>

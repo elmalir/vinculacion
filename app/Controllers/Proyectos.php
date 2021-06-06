@@ -124,7 +124,7 @@ class Proyectos extends Controller{
         //return json_encode($eliminado);
         //print_r($r);
     }
-    public function verPersona()
+    public function verProyecto()
     {
         $id = $this->request->getVar('id');
         $proyecto = new ProyectoModel();
