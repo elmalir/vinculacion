@@ -31,7 +31,7 @@ class Proyectos extends Controller{
     public function guardarProyecto()
     {
         $proyecto = new ProyectoModel();
-        $id = $this->request->getVar('codigo');
+        $id = $this->request->getVar('id');
         //echo $id;
         $dataProyecto =[];
         if (!empty($id)) {
@@ -81,19 +81,24 @@ class Proyectos extends Controller{
         $r = $proyecto->save($dataProyecto);
         if ($r === false) {
             $errores = $proyecto->errors();
-            return $this->nuevoProyecto($errores);
+            if (!empty($id)) {
+                return $this->editarPersona($id, $errores);
+            }else{
+                return $this->nuevoProyecto($errores);
+            }
         }else{
             $session = \Config\Services::session();
             $session->setFlashdata('mensaje', 'Transacción realizada con éxito');
             return redirect()->route('proyectos')->with('msj', 'Guardado de manera existosa');
         }
     }
-    public function editarPersona($id)
+    public function editarPersona($id, $errores='')
     {
         $proyecto = new ProyectoModel();
         $datos['menu'] = 'proyectos';
         $datos['subMenu'] = 'editProyecto';
         $datos['id'] = $id;
+        $datos['errores'] = $errores;
         $datos['proyecto'] = $proyecto->asObject()->find($id);
         //print_r($datos['proyecto']);
         $datos['contenedor'] = 'proyectos/proyecto_edit_view';
@@ -112,7 +117,7 @@ class Proyectos extends Controller{
             $response['titulo']='Eliminado';
             $response['mensaje']='¡Registro eliminado con éxito!';
         }else{
-            $response['estado']=1;
+            $response['estado']=0;
             $response['titulo']='Conflito';
             $response['mensaje']='¡Conflicto al intentar eliminar el registro!';
         }

@@ -178,7 +178,7 @@
 								<i class="ace-icon fa fa-times"></i>
 								Cancelar
 							</button>
-							<button type="submit" class="btn btn-sm btn-success" id="idBtnGuardarPersona">
+							<button type="submit" class="btn btn-sm btn-success" id="idBtnGuardarProyecto">
 								<i class="ace-icon fa fa-check"></i>
 								Guardar
 							</button>

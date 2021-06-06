@@ -28,7 +28,7 @@
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Código
-											<input type="text" name="id" value="<?= $id ?>">
+											<input type="hidden" name="id" value="<?= $id ?>">
 											<input class="form-control" type="text" name="codigo" value="<?= $proyecto->codigo ?>" maxlength="255">
 										</div>
 									</div>

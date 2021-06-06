@@ -34,11 +34,11 @@
                                         <td>
                                             <small><?php echo $p->codigo.' - '.$p->nombre; ?></small>
                                         </td>
-                                        <td><?php echo $p->coordinador; ?>
-                                        <td><?php echo $p->tiempo; ?>
-                                        <td><?php echo $p->numeroParticipantes; ?>
-                                        <td><?php echo $p->numeroVeneficiarios; ?>
-                                        <td><?php echo $p->numeroTutores; ?>
+                                        <td><?php echo $p->coordinador; ?></td>
+                                        <td><?php echo $p->tiempo; ?></td>
+                                        <td><?php echo $p->numeroParticipantes; ?></td>
+                                        <td><?php echo $p->numeroVeneficiarios; ?></td>
+                                        <td><?php echo $p->numeroTutores; ?></td>
                                     </td>
                                     <td>
                                         <div class="hidden-sm hidden-xs action-buttons">
@@ -190,7 +190,7 @@
                                 var json = JSON.parse(data.responseText);
                                 Swal.fire(
                                       'Error!',
-                                      json.sms,
+                                      json.message,
                                       'error'
                                     )
                             },
@@ -198,7 +198,7 @@
                                 var json = JSON.parse(data.responseText);
                                 Swal.fire(
                                       'Error!',
-                                      json.sms,
+                                      json.message,
                                       'error'
                                     )
                             }

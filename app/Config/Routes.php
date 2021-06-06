@@ -52,12 +52,30 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
-$routes->get('/personas', 'Personas::index');
-$routes->get('/personas/nueva', 'Personas::nuevaPersona');
-
 $routes->get('/proyectos', 'Proyectos::index');
 $routes->get('/proyectos/nuevo', 'Proyectos::nuevoProyecto');
 $routes->post('/proyectos/guardar', 'Proyectos::guardarProyecto');
 $routes->get('/proyectos/(:num)/editar', 'Proyectos::editarPersona/$1');
 $routes->post('/proyectos/borrar', 'Proyectos::borrarProyecto');
 $routes->post('/proyectos/ver', 'Proyectos::verPersona');
+
+$routes->get('gruposusuarios', 'GruposUsuarios::index');
+$routes->get('gruposusuarios/nuevo', 'GruposUsuarios::nuevo');
+$routes->post('gruposusuarios/guardar', 'GruposUsuarios::guardar');
+$routes->get('gruposusuarios/(:num)/editar', 'GruposUsuarios::editar/$1');
+$routes->post('gruposusuarios/borrar', 'GruposUsuarios::borrar');
+$routes->post('gruposusuarios/ver', 'GruposUsuarios::verPersona');
+$routes->get('gruposusuarios/pruebas', 'GruposUsuarios::pruebas');
+
+$routes->get('usuarios', 'Usuarios::index');
+$routes->get('usuarios/nuevo', 'Usuarios::nuevo');
+$routes->post('usuarios/guardar', 'Usuarios::guardar');
+$routes->get('usuarios/(:num)/editar', 'Usuarios::editar/$1');
+$routes->post('usuarios/borrar', 'Usuarios::borrar');
+
+$routes->get('personas', 'Personas::index');
+$routes->get('personas/nueva', 'Personas::nueva');
+$routes->post('personas/guardar', 'Personas::guardar');
+$routes->get('personas/(:num)/editar', 'Personas::editar/$1');
+$routes->post('personas/borrar', 'Personas::borrar');
+$routes->post('personas/ver', 'Personas::ver');
