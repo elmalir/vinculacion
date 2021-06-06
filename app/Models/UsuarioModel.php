@@ -28,7 +28,7 @@ class UsuarioModel extends Model{
 	protected $validationRules    = [
 		'identificacion' => 'required|numeric|min_length[5]|is_unique[usuarios.identificacion, id,{id}]',
 		'nombre' => 'required|min_length[8]|is_unique[usuarios.nombre, id,{id}]',
-		'correo' => 'required|valid_email|is_unique[usuarios.nombre, id,{id}]',
+		'correo' => 'required|valid_email|is_unique[usuarios.correo, id,{id}]',
 		'contrasenia' => 'required|min_length[5]|alpha_numeric'
 	];
     protected $validationMessages = [

@@ -1,6 +1,11 @@
 <div class="page-header">
     <h1>
-        Personas
+        Gremios
+        <?php 
+        $session = \Config\Services::session();
+        if (!empty($session->getFlashdata('mensaje'))) {
+            echo '<small><label class="orange">'.$session->getFlashdata('mensaje').'</label></small>';
+        }?>
     </h1>
 </div>
 <div class="row">
@@ -13,75 +18,63 @@
                         <thead>
                             <tr>
                                 <th>Identificación</th>
-                                <th>Nombre</th>
-                                <th>Correo</th>
+                                <th>Razón Social</th>
+                                <th>Nombre Comercial</th>
+                                <th>Representante</th>
                                 <th>Dirección</th>
+                                <th>Correo</th>
                                 <th>Contacto</th>
                                 <th>Observación</th>
-                                <th>Activo</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            if (!empty($personas)) {
-                                foreach ($personas as $per) { ?>
+                            if (!empty($gremios)) {
+                                foreach ($gremios as $gremio) { ?>
                                     <tr>
+                                        <td><?php echo $gremio->identificacion; ?></td>
+                                        <td><?php echo $gremio->razonSocial; ?></td>
+                                        <td><?php echo $gremio->nombreComercial; ?></td>
+                                        <td><?php echo $gremio->representanteLegal; ?></td>
+                                        <td><?php echo $gremio->direccion; ?></td>
+                                        <td><?php echo $gremio->correo; ?></td>
+                                        <td><?php echo $gremio->telefono.' - '.$gremio->celular; ?></td>
+                                        <td><?php echo $gremio->observacion; ?></td>
                                         <td>
-                                            <small><?php echo $per->identificacion ?></small>
-                                        </td>
-                                        <td><?php echo $per->nombre; ?>
-                                        </td>
-                                        <td><?php echo $per->correo; ?>
-                                        <td><?php echo $per->direccion; ?>
-                                        <td><?php echo $per->telefono.' - '.$per->celular; ?>
-                                        <td><?php echo $per->observacion; ?>
-                                        <td><?php echo $per->activo; ?>
-                                    </td>
-                                    <td>
-                                        <div class="hidden-sm hidden-xs action-buttons">
-                                            <a class="blue" onclick="ver('<?php echo $per->id; ?>')" href="#">
-                                                <i class="ace-icon fa fa-eye bigger-120"></i>
-                                            </a>
-                                            <a class="green" onclick="editar('<?php echo $per->id; ?>')" href="#">
-                                                <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                            </a>
-                                            <a class="red" onclick="eliminar('<?php echo $per->id; ?>', '<?php echo $per->nombre; ?>')" href="#">
-                                                <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                            </a>
-                                        </div>
-                                        <div class="hidden-md hidden-lg">
-                                            <div class="inline pos-rel">
-                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                                                    <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                                    <li>
-                                                        <a onclick="ver('<?php echo $per->id; ?>')" href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                            <span class="blue">
-                                                                <i class="ace-icon fa fa-eye bigger-120"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a onclick="editar('.$per->id.')" href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                            <span class="green">
-                                                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a onclick="eliminar('<?php echo $per->id; ?>', '<?php echo $per->nombre; ?>')" href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                            <span class="red">
-                                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                            <div class="hidden-sm hidden-xs action-buttons">
+                                                <a class="green" onclick="editar('<?php echo $gremio->id; ?>')" href="#">
+                                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                                </a>
+                                                <a class="red" onclick="eliminar('<?php echo $gremio->id; ?>', '<?php echo $gremio->razonSocial; ?>')" href="#">
+                                                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                                </a>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                            <div class="hidden-md hidden-lg">
+                                                <div class="inline pos-rel">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                        <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                        <li>
+                                                            <a onclick="editar('<?php echo $gremio->id; ?>')" href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <span class="green">
+                                                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a onclick="eliminar('<?php echo $gremio->id; ?>', '<?php echo $gremio->razonSocial; ?>')" href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <span class="red">
+                                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 <?php }
                             }?>
                         </tbody>
@@ -92,13 +85,67 @@
     </div>
 </div>
 <script>
-    function ver(){
-        console.log('ver');
+    var baseurl = "<?= base_url() ?>";
+    function editar(id){
+        window.location.href = baseurl+'/gremios/'+id+'/editar';
     }
-    function editar(){
-        console.log('editar');
-    }
-    function eliminar(){
-        console.log('eliminar');
-    }
+    function eliminar(id, nombre){
+        Swal.fire({
+          title: '¿Desea elimiar el registro?',
+          text: nombre,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonText: 'Cancelar',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, eliminar!'
+        }).then((result) => {
+              if (result.value) {
+                $.ajax({
+                        type: "post",
+                        url: baseurl+"/gremios/borrar",
+                        data: {"id": id},
+                        success: function(response){
+                            var respuesta = JSON.parse(response);
+                            console.log(respuesta);
+                            if(respuesta.estado == 1){
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: respuesta.titulo,
+                                    text: respuesta.mensaje,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                window.location.href = baseurl+"/gremios";
+                            }else{
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: respuesta.titulo,
+                                    text: respuesta.mensaje,
+                                });
+                            }
+                        }
+                        ,statusCode: {
+                            400: function(data){
+                                var json = JSON.parse(data.responseText);
+                                Swal.fire(
+                                      'Error!',
+                                      json.sms,
+                                      'error'
+                                    )
+                            },
+                            500: function(data){
+                                var json = JSON.parse(data.responseText);
+                                console.log('error',json);
+                                Swal.fire(
+                                      'Error!',
+                                      json.sms,
+                                      'error'
+                                    )
+                            }
+                        }
+                });
+              }
+        })
+    };
 </script>

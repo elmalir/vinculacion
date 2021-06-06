@@ -85,6 +85,12 @@ $routes->post('areasespecificas/guardar', 'AreasEspecificas::guardar');
 $routes->get('areasespecificas/(:num)/editar', 'AreasEspecificas::editar/$1');
 $routes->post('areasespecificas/borrar', 'AreasEspecificas::borrar');
 
+$routes->get('gremios', 'Gremios::index');
+$routes->get('gremios/nuevo', 'Gremios::nuevo');
+$routes->post('gremios/guardar', 'Gremios::guardar');
+$routes->get('gremios/(:num)/editar', 'Gremios::editar/$1');
+$routes->post('gremios/borrar', 'Gremios::borrar');
+
 $routes->get('personas', 'Personas::index');
 $routes->get('personas/nueva', 'Personas::nueva');
 $routes->post('personas/guardar', 'Personas::guardar');

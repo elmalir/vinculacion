@@ -63,7 +63,4 @@ class ProyectoModel extends Model{
     ];
 	protected $skipValidation  = false;
 
-
-
-
 }

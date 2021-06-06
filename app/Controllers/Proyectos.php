@@ -5,8 +5,7 @@ use CodeIgniter\Controller;
 use App\Models\ProyectoModel;
 
 class Proyectos extends Controller{
-
-    
+ 
     public function index()
     {
         helper('form');

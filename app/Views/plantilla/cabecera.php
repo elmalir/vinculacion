@@ -627,6 +627,32 @@
 							</li>
 						</ul>
 					</li>
+					<li <?php echo ($menu=='gremios') ? 'class="active open"' : '' ; ?> >
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-pencil-square-o"></i>
+							<span class="menu-text"> Gremios </span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+						<ul class="submenu nav-<?php echo ($menu=='gremios') ? 'show' : 'hide' ; ?>" 
+							<?php echo ($menu=='gremios') ? 'style="display: block;"' : 'style="display: none;"' ; ?>
+							>
+							<li <?php echo ($subMenu=='newGremio') ? 'class="active open"' : '' ; ?> >
+								<a href="<?= base_url()?>/gremios/nuevo">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Nueva
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li <?php echo ($subMenu=='lstGremios') ? 'class="active open"' : '' ; ?> >
+								<a href="<?= base_url()?>/gremios">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Listado
+								</a>
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
 					<li <?php echo ($menu=='proyectos') ? 'class="active open"' : '' ; ?> >
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>

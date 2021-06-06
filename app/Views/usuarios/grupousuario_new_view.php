@@ -66,9 +66,7 @@
 							<div class="col-xs-12 col-lg-6">
 
 							</div><!--fin de columna derecha -->
-
-
-						</div><!--fin del contenedor -->
+						</div><!--fin del row -->
 
 						<div class="hr hr-12 dotted hr-double"></div>
 

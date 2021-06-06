@@ -8,20 +8,20 @@ class Gremios extends Controller{
     public function index()
     {
         helper('form');
-        $datos['menu'] = 'proyectos';
-        $datos['subMenu'] = 'lstProyectos';
+        $datos['menu'] = 'gremios';
+        $datos['subMenu'] = 'lstGremios';
         $gremio = new GremioModel();
         $datos['gremios'] = $gremio->asObject()->orderBy('id', 'ASC')->findAll();
         $datos['contenedor'] = 'gremios/gremios_view';
-        print_r($datos['contenedor']);
+        //print_r($datos['gremios']);
 		$vista = view('plantilla/template', $datos);
-        //return $vista;
+        return $vista;
     }
     public function nuevo($errores='')
     {
         helper('form');
-        $datos['menu'] = 'proyectos';
-        $datos['subMenu'] = 'newProyecto';
+        $datos['menu'] = 'gremios';
+        $datos['subMenu'] = 'newGremio';
         $datos['errores'] = $errores;
         $datos['contenedor'] = 'gremios/gremio_new_view';
         $vista = view('plantilla/template', $datos);
@@ -29,77 +29,60 @@ class Gremios extends Controller{
     }
     public function guardar()
     {
-        $proyecto = new GremioModel();
+        $gremio = new GremioModel();
         $id = $this->request->getVar('id');
         //echo $id;
-        $dataProyecto =[];
+        $dataGremio =[];
         if (!empty($id)) {
-            $dataProyecto = [
+            $dataGremio = [
                     'id' => $this->request->getVar('id'),
-                    'codigo' => $this->request->getVar('codigo'),
-                    'nombre' => $this->request->getVar('nombre'),
-                    'periodo' => $this->request->getVar('periodo'),
-                    'area' => $this->request->getVar('area'),
-                    'linea' => $this->request->getVar('linea'),
-                    'dominio' => $this->request->getVar('dominio'),
-                    'proyecto' => $this->request->getVar('proyecto'),
-                    'facultad' => $this->request->getVar('facultad'),
-                    'carrera' => $this->request->getVar('carrera'),
-                    'coordinador' => $this->request->getVar('coordinador'),
-                    'tutor' => $this->request->getVar('tutor'),
-                    'cooperantes' => $this->request->getVar('cooperantes'),
-                    'encargado' => $this->request->getVar('encargado'),
-                    'ciudad' => $this->request->getVar('ciudad'),
-                    'tiempo' => $this->request->getVar('tiempo'),
-                    'numeroParticipantes' => $this->request->getVar('numeroParticipantes'),
-                    'numeroVeneficiarios' => $this->request->getVar('numeroVeneficiarios'),
-                    'numeroTutores' => $this->request->getVar('numeroTutores')
+                    'identificacion' => $this->request->getVar('identificacion'),
+                    'razonSocial' => $this->request->getVar('razonSocial'),
+                    'nombreComercial' => $this->request->getVar('nombreComercial'),
+                    'representanteLegal' => $this->request->getVar('representanteLegal'),
+                    'direccion' => $this->request->getVar('direccion'),
+                    'correo' => $this->request->getVar('correo'),
+                    'telefono' => $this->request->getVar('telefono'),
+                    'celular' => $this->request->getVar('celular'),
+                    'observacion' => $this->request->getVar('observacion')
+  
                     ];
         }else{
-            $dataProyecto = [
-                    'codigo' => $this->request->getVar('codigo'),
-                    'nombre' => $this->request->getVar('nombre'),
-                    'periodo' => $this->request->getVar('periodo'),
-                    'area' => $this->request->getVar('area'),
-                    'linea' => $this->request->getVar('linea'),
-                    'dominio' => $this->request->getVar('dominio'),
-                    'proyecto' => $this->request->getVar('proyecto'),
-                    'facultad' => $this->request->getVar('facultad'),
-                    'carrera' => $this->request->getVar('carrera'),
-                    'coordinador' => $this->request->getVar('coordinador'),
-                    'tutor' => $this->request->getVar('tutor'),
-                    'cooperantes' => $this->request->getVar('cooperantes'),
-                    'encargado' => $this->request->getVar('encargado'),
-                    'ciudad' => $this->request->getVar('ciudad'),
-                    'tiempo' => $this->request->getVar('tiempo'),
-                    'numeroParticipantes' => $this->request->getVar('numeroParticipantes'),
-                    'numeroVeneficiarios' => $this->request->getVar('numeroVeneficiarios'),
-                    'numeroTutores' => $this->request->getVar('numeroTutores')
+            $dataGremio = [
+                    'identificacion' => $this->request->getVar('identificacion'),
+                    'razonSocial' => $this->request->getVar('razonSocial'),
+                    'nombreComercial' => $this->request->getVar('nombreComercial'),
+                    'representanteLegal' => $this->request->getVar('representanteLegal'),
+                    'direccion' => $this->request->getVar('direccion'),
+                    'correo' => $this->request->getVar('correo'),
+                    'telefono' => $this->request->getVar('telefono'),
+                    'celular' => $this->request->getVar('celular'),
+                    'observacion' => $this->request->getVar('observacion')
                     ];
         }
-        $r = $proyecto->save($dataProyecto);
+        $r = $gremio->save($dataGremio);
         if ($r === false) {
-            $errores = $proyecto->errors();
+            $errores = $gremio->errors();
             if (!empty($id)) {
-                return $this->editarPersona($id, $errores);
+                return $this->editar($id, $errores);
             }else{
-                return $this->nuevoProyecto($errores);
+                return $this->nuevo($errores);
             }
         }else{
             $session = \Config\Services::session();
             $session->setFlashdata('mensaje', 'Transacción realizada con éxito');
-            return redirect()->route('proyectos')->with('msj', 'Guardado de manera existosa');
+            return redirect()->route('gremios')->with('msj', 'Guardado de manera existosa');
         }
     }
     public function editar($id, $errores='')
     {
-        $proyecto = new GremioModel();
-        $datos['menu'] = 'proyectos';
+        helper('form');
+        $gremio = new GremioModel();
+        $datos['menu'] = 'gremios';
         $datos['subMenu'] = 'editProyecto';
         $datos['id'] = $id;
         $datos['errores'] = $errores;
-        $datos['proyecto'] = $proyecto->asObject()->find($id);
-        //print_r($datos['proyecto']);
+        $datos['gremio'] = $gremio->asObject()->find($id);
         $datos['contenedor'] = 'gremios/gremio_edit_view';
         $vista = view('plantilla/template', $datos);
         return $vista;
@@ -107,9 +90,8 @@ class Gremios extends Controller{
     public function borrar()
     {
         $id = $this->request->getVar('id');
-        $proyecto = new GremioModel();
-        $eliminado = $proyecto->where('id', $id)->delete($id);
-        //$p = $proyecto->asObject()->find($id);
+        $gremio = new GremioModel();
+        $eliminado = $gremio->where('id', $id)->delete($id);
         $response =[];
         if($eliminado == 1){
             $response['estado']=1;
@@ -121,18 +103,6 @@ class Gremios extends Controller{
             $response['mensaje']='¡Conflicto al intentar eliminar el registro!';
         }
         echo json_encode($response);
-        //return json_encode($eliminado);
-        //print_r($r);
-    }
-    public function ver()
-    {
-        $id = $this->request->getVar('id');
-        $proyecto = new GremioModel();
-        $proyecto = $proyecto->asObject()->find($id);
-        //print_r($proyecto);
-        $dato['proyecto'] = $proyecto; 
-        $vista = view("gremios/gremio_show_view", $dato);
-        return $vista;
     }
 
 }
