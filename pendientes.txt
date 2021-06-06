@@ -1,0 +1,3 @@
+Crear la capa de sesión
+Agregar filtro en listado de Asistencias y Personas
+Cambiar íconos

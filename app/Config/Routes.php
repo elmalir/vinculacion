@@ -96,3 +96,10 @@ $routes->post('personas/guardar', 'Personas::guardar');
 $routes->get('personas/(:num)/editar', 'Personas::editar/$1');
 $routes->post('personas/borrar', 'Personas::borrar');
 $routes->post('personas/ver', 'Personas::ver');
+
+$routes->get('asistencias', 'Asistencias::index');
+$routes->get('asistencias/nueva', 'Asistencias::nuevo');
+$routes->post('asistencias/guardar', 'Asistencias::guardar');
+$routes->get('asistencias/(:num)/editar', 'Asistencias::editar/$1');
+$routes->post('asistencias/borrar', 'Asistencias::borrar');
+$routes->post('asistencias/ver', 'Asistencias::ver');
