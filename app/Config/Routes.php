@@ -73,6 +73,18 @@ $routes->post('usuarios/guardar', 'Usuarios::guardar');
 $routes->get('usuarios/(:num)/editar', 'Usuarios::editar/$1');
 $routes->post('usuarios/borrar', 'Usuarios::borrar');
 
+$routes->get('areasgenerales', 'AreasGenerales::index');
+$routes->get('areasgenerales/nuevo', 'AreasGenerales::nuevo');
+$routes->post('areasgenerales/guardar', 'AreasGenerales::guardar');
+$routes->get('areasgenerales/(:num)/editar', 'AreasGenerales::editar/$1');
+$routes->post('areasgenerales/borrar', 'AreasGenerales::borrar');
+
+$routes->get('areasespecificas', 'AreasEspecificas::index');
+$routes->get('areasespecificas/nuevo', 'AreasEspecificas::nuevo');
+$routes->post('areasespecificas/guardar', 'AreasEspecificas::guardar');
+$routes->get('areasespecificas/(:num)/editar', 'AreasEspecificas::editar/$1');
+$routes->post('areasespecificas/borrar', 'AreasEspecificas::borrar');
+
 $routes->get('personas', 'Personas::index');
 $routes->get('personas/nueva', 'Personas::nueva');
 $routes->post('personas/guardar', 'Personas::guardar');
