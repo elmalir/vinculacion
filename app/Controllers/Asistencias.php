@@ -12,40 +12,49 @@ class Asistencias extends Controller{
 
     public function index()
     {
-        $datos['menu'] = 'asistencias';
-        $datos['subMenu'] = 'lstAsistencias';
-        $asistencia = new AsistenciaModel();
-        //$datos['asistencias'] = $asistencia->asObject()->orderBy('id', 'ASC')->findAll();
-        $datos['asistencias'] = $asistencia->getAsistenciasByProyecto(4);
-        //print_r($datos['asistencias']);
-        $datos['contenedor'] = 'asistencias/asistencias_view';
-		$vista = view('plantilla/template', $datos);
-        return $vista;
+        if (!empty(session('usuario'))) {
+            $datos['menu'] = 'asistencias';
+            $datos['subMenu'] = 'lstAsistencias';
+            $asistencia = new AsistenciaModel();
+            //$datos['asistencias'] = $asistencia->asObject()->orderBy('id', 'ASC')->findAll();
+            $datos['asistencias'] = $asistencia->getAsistenciasByProyecto(4);
+            //print_r($datos['asistencias']);
+            $datos['contenedor'] = 'asistencias/asistencias_view';
+            $vista = view('plantilla/template', $datos);
+            return $vista;
+        }else{
+            return redirect()->to(base_url('log'));
+        }
     }
     public function nuevo($errores='', $fechaInicio='')
     {
-        helper('form');
-        //helper('date');
-        $dt = new DateTime('now');
-        //print_r($dt);
-        //$fechaInicio = $dt->format('Y-m-d H:i:s');
-        $datos['menu'] = 'asistencias';
-        $datos['subMenu'] = 'newAsistencia';
-        $datos['errores'] = $errores;
-        $datos['contenedor'] = 'asistencias/asistencia_new_view';
-        if (empty($fechaInicio)) {
-            $datos['fechaInicio'] = $dt->format('Y-m-d H:i:s');
+        if (!empty(session('usuario'))) {
+            helper('form');
+            //helper('date');
+            $dt = new DateTime('now');
+            //print_r($dt);
+            $fechaHoy = $dt->format('Y-m-d');
+            $datos['menu'] = 'asistencias';
+            $datos['subMenu'] = 'newAsistencia';
+            $datos['errores'] = $errores;
+            $datos['contenedor'] = 'asistencias/asistencia_new_view';
+            if (empty($fechaInicio)) {
+                $datos['fechaInicio'] = $dt->format('Y-m-d H:i:s');
+            }else{
+                $datos['fechaInicio'] = $fechaInicio;
+            }
+            $datos['fechaHoy'] = $fechaHoy;
+            $ag = new AreaGeneralModel();
+            $ae = new AreaEspecificaModel();
+            $personas = new PersonaModel();
+            $datos['areasgenerales'] = $ag->asObject()->orderBy('id', 'ASC')->findAll();
+            $datos['areasespecificas'] = $ae->asObject()->orderBy('id', 'ASC')->findAll();
+            $datos['personas'] = $personas->asObject()->orderBy('id', 'ASC')->findAll();
+            $vista = view('plantilla/template', $datos);
+            return $vista;
         }else{
-            $datos['fechaInicio'] = $fechaInicio;
+            return redirect()->to(base_url('log'));
         }
-        $ag = new AreaGeneralModel();
-        $ae = new AreaEspecificaModel();
-        $personas = new PersonaModel();
-        $datos['areasgenerales'] = $ag->asObject()->orderBy('id', 'ASC')->findAll();
-        $datos['areasespecificas'] = $ae->asObject()->orderBy('id', 'ASC')->findAll();
-        $datos['personas'] = $personas->asObject()->orderBy('id', 'ASC')->findAll();
-        $vista = view('plantilla/template', $datos);
-        return $vista;
     }
     public function guardar()
     {
@@ -65,7 +74,9 @@ class Asistencias extends Controller{
         }else{
             $dataAsistencia = [
                     'areageneral_id' => $this->request->getVar('selectAreaGeneral'),
+                    'areageneral' => $this->request->getVar('areageneral'),
                     'areaespecifica_id' => $this->request->getVar('selectAreaEspecifica'),
+                    'areaespecifica' => $this->request->getVar('areaespecifica'),
                     'persona_id' => $this->request->getVar('selectPersona'),
                     'fecha' => $this->request->getVar('fecha'),
                     'fechaInicio' => $this->request->getVar('fechaInicio'),
@@ -94,22 +105,26 @@ class Asistencias extends Controller{
     }
     public function editar($id, $errores='')
     {
-        helper('form');
-        $asistencia = new AsistenciaModel();
-        $datos['menu'] = 'asistencias';
-        $datos['subMenu'] = 'editAsistencia';
-        $datos['id'] = $id;
-        $datos['errores'] = $errores;
-        $ag = new AreaGeneralModel();
-        $ae = new AreaEspecificaModel();
-        $personas = new PersonaModel();
-        $datos['asistencia'] = $asistencia->getOneAsistenciasByProyecto($id, 4);
-        $datos['areasgenerales'] = $ag->asObject()->orderBy('id', 'ASC')->findAll();
-        $datos['areasespecificas'] = $ae->asObject()->orderBy('id', 'ASC')->findAll();
-        $datos['personas'] = $personas->asObject()->orderBy('id', 'ASC')->findAll();
-        $datos['contenedor'] = 'asistencias/asistencia_edit_view';
-        $vista = view('plantilla/template', $datos);
-        return $vista;
+        if (!empty(session('usuario'))) {
+            helper('form');
+            $asistencia = new AsistenciaModel();
+            $datos['menu'] = 'asistencias';
+            $datos['subMenu'] = 'editAsistencia';
+            $datos['id'] = $id;
+            $datos['errores'] = $errores;
+            $ag = new AreaGeneralModel();
+            $ae = new AreaEspecificaModel();
+            $personas = new PersonaModel();
+            $datos['asistencia'] = $asistencia->getOneAsistenciasByProyecto($id, 4);
+            $datos['areasgenerales'] = $ag->asObject()->orderBy('id', 'ASC')->findAll();
+            $datos['areasespecificas'] = $ae->asObject()->orderBy('id', 'ASC')->findAll();
+            $datos['personas'] = $personas->asObject()->orderBy('id', 'ASC')->findAll();
+            $datos['contenedor'] = 'asistencias/asistencia_edit_view';
+            $vista = view('plantilla/template', $datos);
+            return $vista;
+        }else{
+            return redirect()->to(base_url('log'));
+        }
     }
     public function borrar()
     {

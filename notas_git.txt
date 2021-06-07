@@ -13,3 +13,6 @@ git push -u origin main
 git remote add origin https://github.com/elmalir/vinculacion.git
 git branch -M main
 git push -u origin main
+
+
+FC 002003 2772    id=13333

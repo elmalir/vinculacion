@@ -18,7 +18,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('inicio');
+$routes->setDefaultController('log');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,7 +32,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+//$routes->get('/', 'Home::index');
 //$routes->get('/', 'Inicio::index');
 
 /*
@@ -103,3 +103,6 @@ $routes->post('asistencias/guardar', 'Asistencias::guardar');
 $routes->get('asistencias/(:num)/editar', 'Asistencias::editar/$1');
 $routes->post('asistencias/borrar', 'Asistencias::borrar');
 $routes->post('asistencias/ver', 'Asistencias::ver');
+
+$routes->get('log', 'Log::index');
+$routes->post('login', 'Log::login');

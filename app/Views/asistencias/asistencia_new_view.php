@@ -27,7 +27,7 @@
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Área General
-                                        <select class="form-control" name="selectAreaGeneral" id="idSelectGrupo">
+                                        <select class="form-control" name="selectAreaGeneral" id="idSelectAreaGeneral" onchange="select()">
 												<?php 
 												if (!empty($areasgenerales)) {
 													foreach ($areasgenerales as $ag) {
@@ -36,6 +36,7 @@
 												}
 												?>
 											</select>
+											<input type="hidden" name="areageneral" id="areageneral" value="">
 										</div>
 									</div>
 								</div>
@@ -43,7 +44,7 @@
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Área Especifica
-                                        <select class="form-control" name="selectAreaEspecifica" id="idSelectAreaEspecifica">
+                                        <select class="form-control" name="selectAreaEspecifica" id="idSelectAreaEspecifica" onchange="select()">
 												<?php 
 												if (!empty($areasespecificas)) {
 													foreach ($areasespecificas as $ae) {
@@ -52,6 +53,7 @@
 												}
 												?>
 											</select>
+											<input type="hidden" name="areaespecifica" id="areaespecifica" value="">
 										</div>
 									</div>
 								</div>
@@ -75,7 +77,7 @@
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Fecha
-											<input class="form-control" type="date" name="fecha" value="<?= set_value('fecha') ?>">
+											<input class="form-control" type="date" name="fecha" value="<?= set_value('fecha', $fechaHoy) ?>">
 											<input type="hidden" name="fechaInicio" value="<?= $fechaInicio ?>">
 										</div>
 									</div>
@@ -131,6 +133,15 @@
 </div><!-- /.row -->
 
 <script type="text/javascript">
+window.onload = select;
+	function select(){
+		var comboG = document.getElementById("idSelectAreaGeneral");
+		var selectedG = comboG.options[comboG.selectedIndex].text;
+		$('#areageneral').val(selectedG);
+		var comboE = document.getElementById("idSelectAreaEspecifica");
+		var selectedE = comboE.options[comboE.selectedIndex].text;
+		$('#areaespecifica').val(selectedE);
+	}
 	function cancelar(){
     	window.location="<?php echo base_url()?>/asistencias";
   	}

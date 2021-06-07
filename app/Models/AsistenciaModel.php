@@ -12,7 +12,9 @@ class AsistenciaModel extends Model{
     protected $useSoftDeletes = true;
     protected $allowedFields = [
 					'areageneral_id',
+					'areageneral',
 					'areaespecifica_id',
+					'areaespecifica',
 					'persona_id',
 					'fecha',
 					'fechaInicio',
