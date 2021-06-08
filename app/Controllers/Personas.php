@@ -91,20 +91,27 @@ class Personas extends Controller{
     }
     public function borrar()
     {
-        $id = $this->request->getVar('id');
-        $persona = new PersonaModel();
-        $eliminado = $persona->where('id', $id)->delete($id);
-        $response =[];
-        if($eliminado == 1){
-            $response['estado']=1;
-            $response['titulo']='Eliminado';
-            $response['mensaje']='¡Registro eliminado con éxito!';
+        if (session('admin')==1) {
+            $id = $this->request->getVar('id');
+            $persona = new PersonaModel();
+            $eliminado = $persona->where('id', $id)->delete($id);
+            $response =[];
+            if($eliminado == 1){
+                $response['estado']=1;
+                $response['titulo']='Eliminado';
+                $response['mensaje']='¡Registro eliminado con éxito!';
+            }else{
+                $response['estado']=0;
+                $response['titulo']='Conflito';
+                $response['mensaje']='¡Conflicto al intentar eliminar el registro!';
+            }
+            echo json_encode($response);
         }else{
             $response['estado']=0;
             $response['titulo']='Conflito';
-            $response['mensaje']='¡Conflicto al intentar eliminar el registro!';
+            $response['mensaje']='¡No cuenta con los permisos necesarios para la transacción!';
+            echo json_encode($response);
         }
-        echo json_encode($response);
     }
     public function ver()
     {

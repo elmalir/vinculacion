@@ -84,7 +84,8 @@ class Asistencias extends Controller{
                     'problema' => $this->request->getVar('problema'),
                     'solucion' => $this->request->getVar('solucion'),
                     'observacion' => $this->request->getVar('observacion'),
-                    'proyecto_id' => 4,
+                    'proyecto_id' => session('proyecto_id'),
+                    'proyecto' => session('proyecto'),
                     'usuario_id' => 1
                     ];
         }

@@ -23,6 +23,7 @@ class AsistenciaModel extends Model{
 					'solucion',
 					'observacion',
 					'proyecto_id',
+					'proyecto',
 					'usuario_id'
 				];
 	protected $useTimestamps = true; //true->Para que ocupe los campos automáticos

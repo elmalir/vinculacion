@@ -24,6 +24,7 @@
 					<form class="form-horizontal" method="post" action=" <?= site_url('/asistencias/guardar') ?>" >
 						<div class="row">
 							<div class="col-xs-12 col-lg-6">
+								<div class="space-4"></div>
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Área General

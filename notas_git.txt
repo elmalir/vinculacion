@@ -13,6 +13,15 @@ git push -u origin main
 git remote add origin https://github.com/elmalir/vinculacion.git
 git branch -M main
 git push -u origin main
+git pull origin master
+git pull origin master --rebase
+    git rebase --continue
+Error fatal: refusing to merge unrelated histories
+    git pull origin master --allow-unrelated-histories
 
+
+BDD pública empresaria1_vinculacionuta
+Usuario vinculacion
+Contraseña Empdb.V1nc\/l@i0n
 
 FC 002003 2772    id=13333

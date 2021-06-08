@@ -22,31 +22,25 @@ class Log extends Controller{
     {
         $correo = $this->request->getVar('correo');
         $contrasenia = $this->request->getVar('contrasenia');
-        //echo $correo;
-        //echo $contrasenia;
-
         $usuario = new UsuarioModel();
         $wh = ['correo' => $correo, 'contrasenia' => sha1($contrasenia)];
-        $user = $usuario->asObject()->where($wh)->first();
-        //print_r($user);
-        //echo $user->correo;
-        //echo '<br>';
-        //echo count($user);
-        //$user = $usuario->getUserLogin($usuario, sha1($contrasenia));
+        $user = $usuario->asObject()->getOneUsuarioLogin($correo, sha1($contrasenia));
+        
         if (!empty($user)>0) {
             //$sesion = session();
             $sesion = \Config\Services::session();
             $datos = [
-                'usuario' => $user->nombre,
-                'correo' => $user->correo,
-                //'grupousuario_id' = $user->grupousuario_id
+                'usuario' => $user[0]->nombre,
+                'correo' => $user[0]->correo,
+                'admin' => $user[0]->administrador,
+                'proyecto_id' => $user[0]->proyecto_id,
+                'grupousuario_id' => $user[0]->grupousuario_id,
+                'proyecto' => $user[0]->proyecto
             ];
-            print_r($datos);
             $sesion->set($datos);
-            return redirect()->to(base_url('asistencias'))->with('mensaje', 1);
+            return redirect()->to(base_url('asistencias'))->with('mensaje', 'Inicio de sesión correcta'); //envía mensaje flasdata
         }else{
             $errores['mensaje']='Usuario y/o contrasenia incorrectos';
-            //return redirect()->to(base_url('log'))->with('errores', $errores);
             return $this->index($errores);
         }
         

@@ -19,6 +19,7 @@ class UsuarioModel extends Model{
 					'telefono',
 					'celular',
 					'observacion',
+                    'administrador',
 					'grupousuario_id'
 				];
 	protected $useTimestamps = true; //true->Para que ocupe los campos automáticos
@@ -54,11 +55,22 @@ class UsuarioModel extends Model{
     ];
 	protected $skipValidation  = false;
 
-    function getUsuarios(){
+    function getUsuarios($grupousuario_id){
         $builder = $this->db->table('usuarios u');
-        $builder->select('u.id, u.identificacion, u.nombre, u.correo, u.direccion, u.telefono, u.celular, u.observacion, gu.nombre as grupousuario');
+        $builder->select('u.id, u.identificacion, u.nombre, u.correo, u.direccion, u.telefono, u.celular, u.observacion, u.grupousuario_id, gu.nombre as grupousuario');
         $builder->join('gruposusuarios gu', 'gu.id = u.grupousuario_id');
         $builder->where('u.deleted_at',null);
+        $builder->where('u.grupousuario_id', $grupousuario_id);
+        return $builder->get()->getResult();
+    }
+    function getOneUsuarioLogin($correo, $contrasenia){
+        $builder = $this->db->table('usuarios u');
+        $builder->select('u.id, u.identificacion, u.nombre, u.correo, u.direccion, u.telefono, u.celular, u.observacion, u.administrador, u.grupousuario_id, gu.nombre as grupousuario, gu.proyecto_id, p.nombre as proyecto');
+        $builder->join('gruposusuarios gu', 'gu.id = u.grupousuario_id');
+        $builder->join('proyectos p', 'p.id = gu.proyecto_id');
+        $builder->where('u.deleted_at',null);
+        $builder->where('u.correo', $correo);
+        $builder->where('u.contrasenia', $contrasenia);
         return $builder->get()->getResult();
     }
 }

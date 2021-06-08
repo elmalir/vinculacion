@@ -45,10 +45,10 @@
 							<div class="center">
 								<h1>
 									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="red">Ace</span>
-									<span class="white" id="id-text2">Application</span>
+									<span class="white" id="id-text2">Aplicación</span>
+									<span class="red">Asistencias</span>
 								</h1>
-								<h4 class="blue" id="id-company-text">&copy; Company Name</h4>
+								<h4 class="blue" id="id-company-text">&copy; dcc click</h4>
 							</div>
 
 							<div class="space-6"></div>
@@ -60,10 +60,11 @@
 											<h4 class="header blue lighter bigger">
 												<i class="ace-icon fa fa-coffee green"></i>
 												Ingrese sus credenciales
-                                                <?php if (isset($errores)) {
-                                                    echo '<small><label class="orange">'.$errores['mensaje'].'</label></small>';
-                                                } else {
-                                                    echo "no";
+                                                <?php 
+												 if (isset($errores)) {
+													 if (!empty($errores)) {
+														 echo '<small><label class="orange">'.$errores['mensaje'].'</label></small>';
+													 }
                                                 }
                                                  ?>
 											</h4>
@@ -260,21 +261,6 @@
 									</div><!-- /.widget-body -->
 								</div><!-- /.signup-box -->
 							</div><!-- /.position-relative -->
-
-							<div class="navbar-fixed-top align-right">
-								<br />
-								&nbsp;
-								<a id="btn-login-dark" href="#">Dark</a>
-								&nbsp;
-								<span class="blue">/</span>
-								&nbsp;
-								<a id="btn-login-blur" href="#">Blur</a>
-								&nbsp;
-								<span class="blue">/</span>
-								&nbsp;
-								<a id="btn-login-light" href="#">Light</a>
-								&nbsp; &nbsp; &nbsp;
-							</div>
 						</div>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -306,33 +292,6 @@
 			 });
 			});
 			
-			
-			
-			//you don't need this, just used for changing background
-			jQuery(function($) {
-			 $('#btn-login-dark').on('click', function(e) {
-				$('body').attr('class', 'login-layout');
-				$('#id-text2').attr('class', 'white');
-				$('#id-company-text').attr('class', 'blue');
-				
-				e.preventDefault();
-			 });
-			 $('#btn-login-light').on('click', function(e) {
-				$('body').attr('class', 'login-layout light-login');
-				$('#id-text2').attr('class', 'grey');
-				$('#id-company-text').attr('class', 'blue');
-				
-				e.preventDefault();
-			 });
-			 $('#btn-login-blur').on('click', function(e) {
-				$('body').attr('class', 'login-layout blur-login');
-				$('#id-text2').attr('class', 'white');
-				$('#id-company-text').attr('class', 'light-blue');
-				
-				e.preventDefault();
-			 });
-			 
-			});
 		</script>
 	</body>
 </html>
