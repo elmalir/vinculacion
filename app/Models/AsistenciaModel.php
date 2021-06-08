@@ -60,14 +60,34 @@ class AsistenciaModel extends Model{
         $builder->where('a.proyecto_id', $id);
         return $builder->get()->getResult();
     }
-    function getOneAsistenciasByProyecto($id, $idProyecto){
+    function getAsistenciasByUsuario($id){
+        $builder = $this->db->table('asistencias a');
+        $builder->select('a.id, a.fecha, concat(p.identificacion,"  ", p.nombre) as persona, ag.nombre as areageneral, ae.nombre as areaespecifica, a.problema');
+        $builder->join('areasgenerales ag', 'ag.id = a.areageneral_id', 'inner');
+        $builder->join('areasespecificas ae', 'ae.id = a.areaespecifica_id', 'inner');
+        $builder->join('personas p', 'p.id = a.persona_id', 'inner');
+        $builder->where('a.deleted_at',null);
+        $builder->where('a.usuario_id', $id);
+        return $builder->get()->getResult();
+    }
+    function getOneAsistenciasByProyecto($id, $idProyecto, $idUsuario){
         $builder = $this->db->table('asistencias a');
         $builder->select('a.id, a.fecha, concat(p.identificacion,"  ", p.nombre) as persona, ag.nombre as areageneral, ae.nombre as areaespecifica, a.problema, a.solucion, a.observacion');
         $builder->join('areasgenerales ag', 'ag.id = a.areageneral_id', 'inner');
         $builder->join('areasespecificas ae', 'ae.id = a.areaespecifica_id', 'inner');
         $builder->join('personas p', 'p.id = a.persona_id', 'inner');
         $builder->where('a.deleted_at',null);
-        $builder->where('a.id', $id)->where('a.proyecto_id', $idProyecto);
+        $builder->where('a.id', $id)->where('a.proyecto_id', $idProyecto)->where('a.usuario_id', $idUsuario);
+        return $builder->get()->getResult();
+    }
+    function getOneForShowAsistenciasById($id){
+        $builder = $this->db->table('asistencias a');
+        $builder->select('a.id, a.fecha, concat(p.identificacion,"  ", p.nombre) as persona, ag.nombre as areageneral, ae.nombre as areaespecifica, a.problema, a.solucion, a.observacion');
+        $builder->join('areasgenerales ag', 'ag.id = a.areageneral_id', 'inner');
+        $builder->join('areasespecificas ae', 'ae.id = a.areaespecifica_id', 'inner');
+        $builder->join('personas p', 'p.id = a.persona_id', 'inner');
+        $builder->where('a.deleted_at',null);
+        $builder->where('a.id', $id);
         return $builder->get()->getResult();
     }
 

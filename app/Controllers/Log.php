@@ -30,6 +30,7 @@ class Log extends Controller{
             //$sesion = session();
             $sesion = \Config\Services::session();
             $datos = [
+                'id' => $user[0]->id,
                 'usuario' => $user[0]->nombre,
                 'correo' => $user[0]->correo,
                 'admin' => $user[0]->administrador,

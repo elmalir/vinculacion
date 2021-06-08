@@ -17,7 +17,7 @@ class Asistencias extends Controller{
             $datos['subMenu'] = 'lstAsistencias';
             $asistencia = new AsistenciaModel();
             //$datos['asistencias'] = $asistencia->asObject()->orderBy('id', 'ASC')->findAll();
-            $datos['asistencias'] = $asistencia->getAsistenciasByProyecto(4);
+            $datos['asistencias'] = $asistencia->getAsistenciasByUsuario(session('id'));
             //print_r($datos['asistencias']);
             $datos['contenedor'] = 'asistencias/asistencias_view';
             $vista = view('plantilla/template', $datos);
@@ -86,7 +86,7 @@ class Asistencias extends Controller{
                     'observacion' => $this->request->getVar('observacion'),
                     'proyecto_id' => session('proyecto_id'),
                     'proyecto' => session('proyecto'),
-                    'usuario_id' => 1
+                    'usuario_id' => session('id')
                     ];
         }
         //print_r($dataAsistencia);
@@ -116,7 +116,7 @@ class Asistencias extends Controller{
             $ag = new AreaGeneralModel();
             $ae = new AreaEspecificaModel();
             $personas = new PersonaModel();
-            $datos['asistencia'] = $asistencia->getOneAsistenciasByProyecto($id, 4);
+            $datos['asistencia'] = $asistencia->getOneAsistenciasByProyecto($id, session('proyecto_id'), session('id'));
             $datos['areasgenerales'] = $ag->asObject()->orderBy('id', 'ASC')->findAll();
             $datos['areasespecificas'] = $ae->asObject()->orderBy('id', 'ASC')->findAll();
             $datos['personas'] = $personas->asObject()->orderBy('id', 'ASC')->findAll();
@@ -149,7 +149,7 @@ class Asistencias extends Controller{
         $id = $this->request->getVar('id');
         $asistencia = new AsistenciaModel();
         //$asistencia = $asistencia->asObject()->find($id);
-        $asistencia = $asistencia->getOneAsistenciasByProyecto($id, 4);
+        $asistencia = $asistencia->getOneForShowAsistenciasById($id);
         $dato['asistencia'] = $asistencia; 
         $vista = view("asistencias/asistencia_show_view", $dato);
         return $vista;
