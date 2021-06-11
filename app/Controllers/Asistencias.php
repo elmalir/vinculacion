@@ -17,7 +17,11 @@ class Asistencias extends Controller{
             $datos['subMenu'] = 'lstAsistencias';
             $asistencia = new AsistenciaModel();
             //$datos['asistencias'] = $asistencia->asObject()->orderBy('id', 'ASC')->findAll();
-            $datos['asistencias'] = $asistencia->getAsistenciasByUsuario(session('id'));
+            if (session('admin')==1) {
+                $datos['asistencias'] = $asistencia->getAllAsistenciasByProyecto();
+            }else{
+                $datos['asistencias'] = $asistencia->getAsistenciasByUsuario(session('id'));
+            }
             //print_r($datos['asistencias']);
             $datos['contenedor'] = 'asistencias/asistencias_view';
             $vista = view('plantilla/template', $datos);

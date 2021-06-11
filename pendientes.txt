@@ -1,3 +1,22 @@
 Crear la capa de sesión
 Agregar filtro en listado de Asistencias y Personas
 Cambiar íconos
+
+
+bdd empresaria1_asistencias
+user empresaria1_asistencias
+passwd 1sistenci@s
+
+oZieK60JcJEm
+
+asistencias.empresarial.com.ec
+admin@empresarial.com.ec
+062012
+
+Recuerde ingresar Datos para poder realizar las Asistencias
+1 Ingresar Proyecto
+2 Ingresar Grupo de Usuarios
+3 Registrar Usuarios
+4 Ingresar áreas y Sub áreas
+5 Gremios
+6 Personas a asistir

@@ -58,7 +58,7 @@ class ProyectoModel extends Model{
     						'required' => 'El campo Tiempo es obligatorio'
 		],
 		'numeroParticipantes' => [
-			'numeric' => 'El campo Número de Pacientes debe contener valores numéricos'
+			'numeric' => 'El campo Número de Participantes debe contener valores numéricos'
 		]
     ];
 	protected $skipValidation  = false;

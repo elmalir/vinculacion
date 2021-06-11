@@ -63,6 +63,13 @@ class UsuarioModel extends Model{
         $builder->where('u.grupousuario_id', $grupousuario_id);
         return $builder->get()->getResult();
     }
+    function getAllUsuarios(){
+        $builder = $this->db->table('usuarios u');
+        $builder->select('u.id, u.identificacion, u.nombre, u.correo, u.direccion, u.telefono, u.celular, u.observacion, u.grupousuario_id, gu.nombre as grupousuario');
+        $builder->join('gruposusuarios gu', 'gu.id = u.grupousuario_id');
+        $builder->where('u.deleted_at',null);
+        return $builder->get()->getResult();
+    }
     function getOneUsuarioLogin($correo, $contrasenia){
         $builder = $this->db->table('usuarios u');
         $builder->select('u.id, u.identificacion, u.nombre, u.correo, u.direccion, u.telefono, u.celular, u.observacion, u.administrador, u.grupousuario_id, gu.nombre as grupousuario, gu.proyecto_id, p.nombre as proyecto');

@@ -12,7 +12,11 @@ class Usuarios extends Controller{
             $datos['menu'] = 'usuarios';
             $datos['subMenu'] = 'lstUsuarios';
             $usuarios = new UsuarioModel();
-            $datos['usuarios'] = $usuarios->asObject()->getUsuarios(session('grupousuario_id'));
+            if (session('admin')==1) {
+                $datos['usuarios'] = $usuarios->asObject()->getAllUsuarios();
+            }else{
+                $datos['usuarios'] = $usuarios->asObject()->getUsuarios(session('grupousuario_id'));
+            }
             $datos['contenedor'] = 'usuarios/usuarios_view';
             $vista = view('plantilla/template', $datos);
             return $vista;
@@ -29,7 +33,8 @@ class Usuarios extends Controller{
             $datos['subMenu'] = 'newUsuario';
             $datos['errores'] = $errores;
             $grupos = new GrupoUsuarioModel();
-            $datos['grupos'] = $grupos->asObject()->where('proyecto_id', session('proyecto_id'))->orderBy('id', 'ASC')->findAll();
+            //$datos['grupos'] = $grupos->asObject()->where('proyecto_id', session('proyecto_id'))->orderBy('id', 'ASC')->findAll();
+            $datos['grupos'] = $grupos->asObject()->orderBy('id', 'ASC')->findAll();
             $datos['contenedor'] = 'usuarios/usuario_new_view';
             $vista = view('plantilla/template', $datos);
             return $vista;
