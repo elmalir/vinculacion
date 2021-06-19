@@ -344,4 +344,7 @@ update areasespecificas set areageneral_id = 2;
 ALTER TABLE `areasespecificas` CHANGE `areageneral_id` `areageneral_id` BIGINT(20) UNSIGNED NOT NULL; 
 ALTER TABLE `areasespecificas` ADD CONSTRAINT `area_general_id_foreign` FOREIGN KEY (`areageneral_id`) REFERENCES `areasgenerales`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
 
+select (select ag.id from areasgenerales ag where ag.nombre = ae.descripcion) as id,
+ae.descripcion from areasespecificas ae;
+
 
