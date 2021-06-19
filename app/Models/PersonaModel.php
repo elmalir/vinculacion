@@ -19,6 +19,14 @@ class PersonaModel extends Model{
         'celular',
         'observacion',
         'activo',
+        'provincia_id',
+        'ciudad_id',
+        'parroquia',
+        'sexo',
+        'f_nacimiento',
+        'dicapacidad',
+        'nacionalidad',
+        'movilidad',
         'gremio_id'
     ];
     protected $useTimestamps = true; //true->Para que ocupe los campos automáticos
@@ -39,7 +47,8 @@ class PersonaModel extends Model{
     	],
     	'nombre' => [
             'required' => 'El campo Nombre es obligatorio',
-            'min_length' => 'El campo Nombre debe tener mínimo 8 dígitos'
+            'min_length' => 'El campo Nombre debe tener mínimo 8 dígitos',
+            'is_unique' => 'El campo Nombre ya se encuentra registrado',
     	],
     	'correo' => [
             'required' => 'El campo Correo es obligatorio',

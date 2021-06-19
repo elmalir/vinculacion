@@ -3,6 +3,8 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\AreaEspecificaModel;
+use App\Models\AreaGeneralModel;
+
 class AreasEspecificas extends Controller{
     public function index()
     {
@@ -26,6 +28,8 @@ class AreasEspecificas extends Controller{
             $datos['menu'] = 'areasespecificas';
             $datos['subMenu'] = 'newAreaEspecifica';
             $datos['errores'] = $errores;
+            $areasGenerales = new AreaGeneralModel();
+            $datos['generales'] = $areasGenerales->where('activo', 1)->asObject()->orderBy('id', 'ASC')->findAll();
             $datos['contenedor'] = 'areas/areaespecifica_new_view';
             $vista = view('plantilla/template', $datos);
             return $vista;
@@ -40,22 +44,24 @@ class AreasEspecificas extends Controller{
         if (session('admin')==1) {
             $area = new AreaEspecificaModel();
             $id = $this->request->getVar('id');
-            $dataGrupo =[];
+            $dataEspecifica =[];
             if (!empty($id)) {
-                $dataGrupo = [
+                $dataEspecifica = [
                         'id' => $this->request->getVar('id'),
                         'nombre' => $this->request->getVar('nombre'),
-                        'descripcion' => $this->request->getVar('descripcion'),
+                        'activo' => $this->request->getVar('selectActivo'),
+                        'areageneral_id' => $this->request->getVar('selectAreaGeneral'),
                         'activo' => $this->request->getVar('selectActivo')
-                        ];
-            }else{
-                $dataGrupo = [
+                    ];
+                }else{
+                    $dataEspecifica = [
                         'nombre' => $this->request->getVar('nombre'),
                         'descripcion' => $this->request->getVar('descripcion'),
+                        'areageneral_id' => $this->request->getVar('selectAreaGeneral'),
                         'activo' => $this->request->getVar('selectActivo')
                         ];
             }
-            $r = $area->save($dataGrupo);
+            $r = $area->save($dataEspecifica);
             if ($r === false) {
                 $errores = $area->errors();
                 if (!empty($id)) {
@@ -83,6 +89,8 @@ class AreasEspecificas extends Controller{
             $datos['subMenu'] = 'editGrupo';
             $datos['id'] = $id;
             $datos['errores'] = $errores;
+            $areasGenerales = new AreaGeneralModel();
+            $datos['generales'] = $areasGenerales->where('activo', 1)->asObject()->orderBy('id', 'ASC')->findAll();
             $datos['area'] = $area->asObject()->find($id);
             $datos['contenedor'] = 'areas/areaespecifica_edit_view';
             $vista = view('plantilla/template', $datos);

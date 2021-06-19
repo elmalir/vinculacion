@@ -1,9 +1,11 @@
 <?php 
 namespace App\Controllers;
 
+use App\Models\Ciudad;
 use App\Models\GremioModel;
 use CodeIgniter\Controller;
 use App\Models\PersonaModel;
+use App\Models\Provincia;
 
 class Personas extends Controller{
 
@@ -25,7 +27,9 @@ class Personas extends Controller{
         $datos['errores'] = $errores;
         $datos['contenedor'] = 'personas/persona_new_view';
         $gremio = new GremioModel();
+        $provincias = new Provincia();
         $datos['gremios'] = $gremio->asObject()->orderBy('id', 'ASC')->findAll();
+        $datos['provincias'] = $provincias->asObject()->orderBy('id', 'ASC')->findAll();
         $vista = view('plantilla/template', $datos);
         return $vista;
     }
@@ -33,9 +37,9 @@ class Personas extends Controller{
     {
         $persona = new PersonaModel();
         $id = $this->request->getVar('id');
-        $dataGremio =[];
+        $dataPersona =[];
         if (!empty($id)) {
-            $dataGremio = [
+            $dataPersona = [
                     'id' => $this->request->getVar('id'),
                     'identificacion' => $this->request->getVar('identificacion'),
                     'nombre' => $this->request->getVar('nombre'),
@@ -45,10 +49,18 @@ class Personas extends Controller{
                     'celular' => $this->request->getVar('celular'),
                     'observacion' => $this->request->getVar('observacion'),
                     'activo' => $this->request->getVar('selectActivo'),
+                    'provincia_id' => $this->request->getVar('selectProvincia'),
+                    'ciudad_id' => $this->request->getVar('selectCiudad'),
+                    'parroquia' => $this->request->getVar('parroquia'),
+                    'sexo' => $this->request->getVar('selectSexo'),
+                    'f_nacimiento' => $this->request->getVar('f_nacimiento'),
+                    'discapacidad' => $this->request->getVar('discapacidad'),
+                    'nacionalidad' => $this->request->getVar('nacionalidad'),
+                    'movilidad' => $this->request->getVar('movilidad'),
                     'gremio_id' => $this->request->getVar('selectGremio')
                     ];
         }else{
-            $dataGremio = [
+            $dataPersona = [
                     'identificacion' => $this->request->getVar('identificacion'),
                     'nombre' => $this->request->getVar('nombre'),
                     'correo' => $this->request->getVar('correo'),
@@ -57,10 +69,19 @@ class Personas extends Controller{
                     'celular' => $this->request->getVar('celular'),
                     'observacion' => $this->request->getVar('observacion'),
                     'activo' => $this->request->getVar('selectActivo'),
+                    'provincia_id' => $this->request->getVar('selectProvincia'),
+                    'ciudad_id' => $this->request->getVar('selectCiudad'),
+                    'parroquia' => $this->request->getVar('parroquia'),
+                    'sexo' => $this->request->getVar('selectSexo'),
+                    'f_nacimiento' => $this->request->getVar('f_nacimiento'),
+                    'discapacidad' => $this->request->getVar('discapacidad'),
+                    'nacionalidad' => $this->request->getVar('nacionalidad'),
+                    'movilidad' => $this->request->getVar('movilidad'),
                     'gremio_id' => $this->request->getVar('selectGremio')
                     ];
         }
-        $r = $persona->save($dataGremio);
+        //print_r($dataPersona);
+        $r = $persona->save($dataPersona);
         if ($r === false) {
             $errores = $persona->errors();
             if (!empty($id)) {
@@ -82,12 +103,18 @@ class Personas extends Controller{
         $datos['subMenu'] = 'editPersona';
         $datos['id'] = $id;
         $datos['errores'] = $errores;
-        $datos['persona'] = $persona->asObject()->find($id);
+        $persona = $persona->asObject()->find($id);
         $gremio = new GremioModel();
+        $provincias = new Provincia();
+        $ciudades = new Ciudad();
         $datos['gremios'] = $gremio->asObject()->orderBy('id', 'ASC')->findAll();
+        $datos['provincias'] = $provincias->asObject()->orderBy('id', 'ASC')->findAll();
+        $datos['ciudades'] = $ciudades->asObject()->where('IdProvincia', $persona->provincia_id)->findAll();
+        $datos['persona'] = $persona;
         $datos['contenedor'] = 'personas/persona_edit_view';
         $vista = view('plantilla/template', $datos);
         return $vista;
+        print_r($datos['persona']);
     }
     public function borrar()
     {
@@ -123,5 +150,22 @@ class Personas extends Controller{
         $vista = view("personas/persona_show_view", $dato);
         return $vista;
     }
+    public function getCiudadByProv($idProvincia, $idCiudad='')
+	{
+        $ciudade = new Ciudad();
+		$ciudades = $ciudade->asObject()->where('IdProvincia', $idProvincia)->findAll();
+		$options = '';
+		foreach ($ciudades as $c) {
+			if (!empty($idCiudad)) {
+				if ($idCiudad== $c->Id) {
+					$options .= '<option selected value="'.$c->Id.'">'.$c->Nombre.'</option>';
+				}
+				$options .= '<option value="'.$c->Id.'">'.$c->Nombre.'</option>';
+			}else{
+				$options .= '<option value="'.$c->Id.'">'.$c->Nombre.'</option>';
+			}
+		}
+		echo $options;
+	}
 
 }

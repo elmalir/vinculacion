@@ -40,6 +40,22 @@
 								<div class="space-4"></div>
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
+										<div class="col-xs-12 col-lg-12">Área General
+										<select class="form-control" name="selectAreaGeneral" id="idSelectAreaGeneral" onchange="cargarCiudad()">
+												<?php 
+												if (!empty($generales)) {
+													foreach ($generales as $ag) {
+														echo '<option value="'.$ag->id.'">'.$ag->nombre.'</option>';
+													}
+												}
+												?>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Descripción
 											<input class="form-control" type="text" name="descripcion" value="<?= set_value('descripcion') ?>" maxlength="255">
 										</div>

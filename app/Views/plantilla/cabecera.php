@@ -74,7 +74,7 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<span class="user-info">
 									<small>Bienvenido,</small>
-									<?php  echo session('usuario') ?> Guananga
+									<?php  echo session('usuario') ?>
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>

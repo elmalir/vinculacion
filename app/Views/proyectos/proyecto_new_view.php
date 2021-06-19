@@ -160,7 +160,7 @@
 										</div>
 									</div>
 									<div class="col-xs-6 col-lg-6">
-										<div class="col-xs-12 col-lg-12">No. Veneficiarios
+										<div class="col-xs-12 col-lg-12">No. Tutores
 											<input class="form-control" type="text" name="numeroTutores" value="<?= set_value('numeroTutores') ?>" maxlength="20">
 										</div>
 									</div>

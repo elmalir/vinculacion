@@ -11,7 +11,7 @@ class AreaEspecificaModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'descripcion', 'activo'];
+    protected $allowedFields = ['nombre', 'descripcion', 'activo', 'areageneral_id'];
 
     protected $useTimestamps = false;
     //protected $createdField  = 'created_at';

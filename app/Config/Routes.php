@@ -97,6 +97,7 @@ $routes->post('personas/guardar', 'Personas::guardar');
 $routes->get('personas/(:num)/editar', 'Personas::editar/$1');
 $routes->post('personas/borrar', 'Personas::borrar');
 $routes->post('personas/ver', 'Personas::ver');
+$routes->get('personas/ciudades/(:num)', 'Personas::getCiudadByProv/$1');
 
 $routes->get('asistencias', 'Asistencias::index');
 $routes->get('asistencias/nueva', 'Asistencias::nuevo');
