@@ -105,6 +105,8 @@ $routes->post('asistencias/guardar', 'Asistencias::guardar');
 $routes->get('asistencias/(:num)/editar', 'Asistencias::editar/$1');
 $routes->post('asistencias/borrar', 'Asistencias::borrar');
 $routes->post('asistencias/ver', 'Asistencias::ver');
+$routes->get('asistencias/subAreas/(:num)', 'Asistencias::getSubAreasByArea/$1');
+
 
 $routes->get('log', 'Log::index');
 $routes->post('login', 'Log::login');

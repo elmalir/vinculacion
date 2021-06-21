@@ -12,7 +12,7 @@
 		<div class="footer-content">
 			<span class="bigger-120"><a href="https://empresarial.com.ec/empresa" target="_blank">Díaz & Bonilla S.A.</a>&nbsp; &nbsp;
 			    Aplicación
-				<span class="orange bolder">DBC-e</span> &copy; 2020 - <span class="orange bolder">diaz_bonilla@hotmal.com</span> - dnuela@empresarial.com.ec - <span class="orange bolder">032 829075</span>
+				<span class="orange bolder">Vinculación</span> &copy; 2020 - <span class="orange bolder">diaz_bonilla@hotmal.com</span> - dnuela@empresarial.com.ec - <span class="orange bolder">032 829075</span>
 				
 			</span>
 			&nbsp; &nbsp;

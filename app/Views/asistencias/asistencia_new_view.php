@@ -45,14 +45,8 @@
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Área Especifica
-                                        <select class="form-control" name="selectAreaEspecifica" id="idSelectAreaEspecifica" onchange="select()">
-												<?php 
-												if (!empty($areasespecificas)) {
-													foreach ($areasespecificas as $ae) {
-														echo '<option value="'.$ae->id.'">'.$ae->nombre.'</option>';
-													}
-												}
-												?>
+                                        	<select class="form-control" name="selectAreaEspecifica" id="idSelectAreaEspecifica" onchange="selectE()">
+
 											</select>
 											<input type="hidden" name="areaespecifica" id="areaespecifica" value="">
 										</div>
@@ -134,11 +128,34 @@
 </div><!-- /.row -->
 
 <script type="text/javascript">
+var base_url = '<?php echo base_url() ?>';
 window.onload = select;
 	function select(){
 		var comboG = document.getElementById("idSelectAreaGeneral");
 		var selectedG = comboG.options[comboG.selectedIndex].text;
 		$('#areageneral').val(selectedG);
+		//var comboE = document.getElementById("idSelectAreaEspecifica");
+		//var selectedE = comboE.options[comboE.selectedIndex].text;
+		//$('#areaespecifica').val(selectedE);
+		cargarSubArea();
+	}
+	function cargarSubArea() {
+		var comboG = document.getElementById("idSelectAreaGeneral");
+		var idArea = comboG.options[comboG.selectedIndex].value;
+		//console.log('idArea', idArea);
+		$.ajax({
+			type: "GET",
+			url: base_url+'/asistencias/subAreas/'+idArea,
+			//data: {"areageneral_id": idArea },
+			success:function(resp){
+					console.log('resp', resp);
+					$("#idSelectAreaEspecifica").html(resp);
+					selectE();
+				}
+		});
+	}
+	function selectE(){
+		//console.log('selectE');
 		var comboE = document.getElementById("idSelectAreaEspecifica");
 		var selectedE = comboE.options[comboE.selectedIndex].text;
 		$('#areaespecifica').val(selectedE);

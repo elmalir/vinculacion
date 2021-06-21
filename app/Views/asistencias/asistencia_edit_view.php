@@ -24,13 +24,16 @@
 					<form class="form-horizontal" method="post" action=" <?= site_url('/asistencias/guardar') ?>" >
 						<div class="row">
 							<div class="col-xs-12 col-lg-6">
+							<div class="space-4"></div>
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Área General
 											<input type="hidden" name="id" value="<?= $id ?>">
-											<select class="form-control" name="selectAreaGeneral" id="idSelectGrupo">
+											<select class="form-control" name="selectAreaGeneral" id="idSelectAreaGeneral">
 												<?php 
+												if(!empty($asistencia)){
 													echo '<option value="">'.$asistencia[0]->areageneral.'</option>';
+												}
 												?>
 											</select>
 										</div>
@@ -42,7 +45,9 @@
 										<div class="col-xs-12 col-lg-12">Área Especifica
                                         	<select class="form-control" name="selectAreaEspecifica" id="idSelectAreaEspecifica">
 												<?php 
-												echo '<option value="">'.$asistencia[0]->areaespecifica.'</option>';
+												if(!empty($asistencia)){
+													echo '<option value="">'.$asistencia[0]->areaespecifica.'</option>';
+												}
 												?>
 											</select>
 										</div>
@@ -54,7 +59,9 @@
 										<div class="col-xs-12 col-lg-12">Persona
                                         	<select class="form-control" name="selectPersona" id="idSelectPersona">
 												<?php 
-												echo '<option value="">'.$asistencia[0]->persona.'</option>';
+												if(!empty($asistencia)){
+													echo '<option value="">'.$asistencia[0]->persona.'</option>';
+												}
 												?>
 											</select>
 										</div>
@@ -64,18 +71,19 @@
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Fecha
-											<input class="form-control" type="date" name="fecha" value="<?= set_value('fecha', $asistencia[0]->fecha) ?>" readonly>
+											<input class="form-control" type="date" name="fecha" value="<?= set_value('fecha', (!empty($asistencia)) ? $asistencia[0]->fecha: '') ?>" readonly>
 										</div>
 									</div>
 								</div>
 								<div class="space-4"></div>
+								
 							</div><!--fin de columna izquierda -->
 							<div class="col-xs-12 col-lg-6">
 								<div class="space-4"></div>
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Ploblema
-											<textarea style="resize:none" class="form-control" name="problema" rows="2"><?= set_value('problema', $asistencia[0]->problema) ?></textarea>
+											<textarea style="resize:none" class="form-control" name="problema" rows="2"><?= set_value('problema', (!empty($asistencia)) ? $asistencia[0]->problema: '') ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -83,7 +91,7 @@
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Solución
-										<textarea style="resize:none" class="form-control" name="solucion" rows="2"><?= set_value('solucion', $asistencia[0]->solucion) ?></textarea>
+										<textarea style="resize:none" class="form-control" name="solucion" rows="2"><?= set_value('solucion', (!empty($asistencia)) ? $asistencia[0]->solucion: '') ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -91,7 +99,7 @@
 								<div class="row">
 									<div class="col-xs-12 col-lg-12">
 										<div class="col-xs-12 col-lg-12">Observación
-										<textarea style="resize:none" class="form-control" name="observacion" rows="2"><?= set_value('observacion', $asistencia[0]->observacion) ?></textarea>
+										<textarea style="resize:none" class="form-control" name="observacion" rows="2"><?= set_value('observacion', (!empty($asistencia)) ? $asistencia[0]->observacion: '') ?></textarea>
 										</div>
 									</div>
 								</div>

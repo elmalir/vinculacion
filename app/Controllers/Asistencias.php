@@ -158,5 +158,23 @@ class Asistencias extends Controller{
         $vista = view("asistencias/asistencia_show_view", $dato);
         return $vista;
     }
+    public function getSubAreasByArea($idArea, $idSubArea='')
+	{
+        $areaG = new AreaEspecificaModel();
+		$areas = $areaG->asObject()->where('areageneral_id', $idArea)->findAll();
+		$options = '';
+        //print_r($areas);
+		foreach ($areas as $c) {
+			if (!empty($idSubArea)) {
+				if ($idSubArea== $c->id) {
+					$options .= '<option selected value="'.$c->id.'">'.$c->nombre.'</option>';
+				}
+				$options .= '<option value="'.$c->id.'">'.$c->nombre.'</option>';
+			}else{
+				$options .= '<option value="'.$c->id.'">'.$c->nombre.'</option>';
+			}
+		}
+		echo $options;
+	}
 
 }
